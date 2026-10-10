@@ -19,7 +19,7 @@ import (
 	"time"
 )
 
-const toolVersion = "0.1.0"
+const toolVersion = "0.1.1"
 
 //go:embed sheets/assets.json sheets/sounds.json
 var sheets embed.FS
@@ -319,7 +319,22 @@ func run() error {
 	workDir := flag.String("work", "", "scratch folder (default: a temp folder)")
 	doneFile := flag.String("done", "", "extra path to write the done marker to")
 	force := flag.Bool("force", false, "convert even if already done")
+	play := flag.Bool("play", false, "select the module in Warband's launcher and start Warband")
 	flag.Parse()
+	if *play {
+		if *game == "" {
+			return fmt.Errorf("--play needs --game")
+		}
+		if err := selectModule(*modName); err != nil {
+			return fmt.Errorf("could not select the module for Warband: %w", err)
+		}
+		cmd := exec.Command(filepath.Join(*game, "mb_warband.exe"))
+		cmd.Dir = *game
+		if err := cmd.Start(); err != nil {
+			return fmt.Errorf("could not start Warband: %w", err)
+		}
+		return cmd.Wait()
+	}
 	if *cs2 == "" || *game == "" {
 		return fmt.Errorf("both --cs2 and --game are required")
 	}
