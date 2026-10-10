@@ -580,5 +580,10 @@ func emptyBodyMeshes(material string) []*Mesh {
 		mk("cs2_none_handL", V3{0, 0, 0}, -1),
 		mk("cs2_none_handR", V3{0, 0, 0}, -1),
 		mk("cs2_none_head", V3{0, 0, 0}, -1),
+		// Warband's own crosshair pieces, emptied: the module draws a CS2-style crosshair instead
+		mk("crosshair", V3{0, 0, 0}, -1),
+		mk("crosshair_up", V3{0, 0, 0}, -1),
+		mk("crosshair_left", V3{0, 0, 0}, -1),
+		mk("crosshair_right", V3{0, 0, 0}, -1),
 	}
 }
