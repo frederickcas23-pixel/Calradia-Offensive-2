@@ -221,6 +221,25 @@ s = rd(M); a = s.index('  ("start_game_0",'); blk_end = s.index('\n  ),\n', a) +
 blk = s[a:blk_end]; assert blk.count('(jump_to_menu, "mnu_start_game_1")') == 1
 s = s[:a] + blk.replace('(jump_to_menu, "mnu_start_game_1")', '(jump_to_menu, "mnu_cs2_choose_look")').replace(
     'Before beginning the game you must create your character.', 'You arrive as a gun for hire.') + s[blk_end:]
+# The engine opens the second menu (start_phase_2) by itself once its own character screen closes.
+# With the CS2 start already chosen there is nothing to ask there, so it places the party and goes to the map.
+a = s.index('  ("start_phase_2",mnf_disable_all_keys,'); blk_end = s.index('\n  ),\n', a) + 6
+blk = s[a:blk_end]; old = '    "none",\n    [],\n    [\n'; assert blk.count(old) == 1
+s = s[:a] + blk.replace(old, """    "none",
+    [
+      (try_begin),
+        (eq, "$current_startup_quest_phase", 4),
+        (party_relocate_near_party, "p_main_party", "$g_starting_town", 2),
+        (change_screen_return),
+      (try_end),
+    ],
+    [
+      ("cs2_to_map",[(eq, "$current_startup_quest_phase", 4),],"Continue...",
+       [
+         (party_relocate_near_party, "p_main_party", "$g_starting_town", 2),
+         (change_screen_return),
+       ]),
+""") + s[blk_end:]
 B = ST['build']
 build = ''.join(f'         (troop_raise_attribute, "trp_player", {k}, {v}),\n' for k, v in B['attributes'].items()) \
       + ''.join(f'         (troop_raise_skill, "trp_player", {k}, {v}),\n' for k, v in B['skills'].items()) \

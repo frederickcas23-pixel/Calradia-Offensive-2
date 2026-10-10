@@ -17,7 +17,7 @@
  {"id":"start_war","file":"module_scripts.py","what":"T and CT begin at war with each other","sheet":"factions","verified":"build"},
  {"id":"traders","file":"module_scripts.py","what":"weaponsmiths and armourers in T and CT towns stock CS2 gear","sheet":"weapons,ammo,armor","verified":"build"},
  {"id":"diplomacy_trigger","file":"module_simple_triggers.py","what":"relation loop covers all kingdoms","sheet":"factions","verified":"build"},
- {"id":"mercenary_start","file":"module_game_menus.py","what":"look choice, CS2 gear, starting gold, neutral to all","sheet":"start","verified":"build"},
+ {"id":"mercenary_start","file":"module_game_menus.py","what":"no character creator: look choice from the first menu, CS2 gear, gold, preset build, spawn at the capital; the engine-opened second menu goes straight to the map","sheet":"start","verified":"build"},
  {"id":"module_ini","file":"(setup tool)","what":"module.ini derived from the player's Native: firearms proficiency shown, module sounds and textures scanned, cs2_assets loaded","sheet":"assets","verified":"devrun"},
  {"id":"native_base","file":"(setup tool)","what":"scenes, map and base data copied from the player's own Native module","sheet":"assets","verified":"devrun"},
  {"id":"cs2_assets","file":"(setup tool)","what":"meshes, textures and sounds converted from the player's CS2 install","sheet":"assets,sounds","verified":"devrun"}
