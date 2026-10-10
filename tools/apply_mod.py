@@ -333,6 +333,7 @@ for w in W:
     init += ''.join(f'  (item_set_slot, "itm_{w["id"]}", {SL[k]}, {x}),\n' for k, x in v.items())
     init += f'  (item_set_slot, "itm_{w["id"]}", {SL["snd"]}, "snd_{w["sound"]}"),\n'
 DEFAULT_AMMO = AM[0]['id']
+ARMOR_FULL, HORSE_BASE = 50, 60
 CS2_DEBUG = int(os.environ.get('CS2_DEBUG', '0'))
 gun = f"""
 cs2_before_start = (ti_before_mission_start, 0, 0, [], [
@@ -496,23 +497,39 @@ cs2_hit = (ti_on_agent_hit, 0, 0, [], [
   (try_for_range, ":unused", 0, ":steps"), (val_mul, ":dmg", ":rm"), (val_div, ":dmg", 1000), (try_end),
   (store_mod, ":rem", ":dist", 1270), (store_sub, ":loss", 1000, ":rm"), (val_mul, ":loss", ":rem"), (val_div, ":loss", 1270),
   (store_sub, ":keep", 1000, ":loss"), (val_mul, ":dmg", ":keep"), (val_div, ":dmg", 1000),
-  (assign, ":armored", 0),
+  # hit location and how much armour really covers it: the summed Warband armour value of what the victim wears there
+  (assign, ":armor", 0), (assign, ":human", 0),
   (try_begin), (agent_is_human, ":v"),
+    (assign, ":human", 1), (assign, ":loc", 1),
     (try_begin), (eq, ":bone", 9),
-      (item_get_slot, ":hs", ":w", {SL['hs']}), (val_mul, ":dmg", ":hs"), (val_div, ":dmg", 100),
-      (agent_get_item_slot, ":it", ":v", 4), (ge, ":it", 0), (assign, ":armored", 1),
+      (assign, ":loc", 0), (item_get_slot, ":hs", ":w", {SL['hs']}), (val_mul, ":dmg", ":hs"), (val_div, ":dmg", 100),
     (else_try), (is_between, ":bone", 1, 7),
-      (val_mul, ":dmg", 3), (val_div, ":dmg", 4),
-    (else_try),
-      (try_begin), (eq, ":bone", 0), (val_mul, ":dmg", 5), (val_div, ":dmg", 4), (try_end),
-      (agent_get_item_slot, ":it", ":v", 5), (ge, ":it", 0), (assign, ":armored", 1),
+      (assign, ":loc", 2), (val_mul, ":dmg", 3), (val_div, ":dmg", 4),
+    (else_try), (eq, ":bone", 0),
+      (val_mul, ":dmg", 5), (val_div, ":dmg", 4),
+    (try_end),
+    (try_for_range, ":i", 4, 8),
+      (agent_get_item_slot, ":it", ":v", ":i"), (ge, ":it", 0),
+      (try_begin), (eq, ":loc", 0), (item_get_head_armor, ":x", ":it"),
+      (else_try), (eq, ":loc", 1), (item_get_body_armor, ":x", ":it"),
+      (else_try), (item_get_leg_armor, ":x", ":it"), (try_end),
+      (val_add, ":armor", ":x"),
     (try_end),
   (try_end),
-  (try_begin), (eq, ":armored", 1), (item_get_slot, ":ar", ":w", {SL['armor']}), (val_mul, ":dmg", ":ar"), (val_div, ":dmg", 1000), (try_end),
-  (store_agent_hit_points, ":pct", ":v", 0), (store_agent_hit_points, ":abs", ":v", 1), (val_max, ":pct", 1),
-  (store_mul, ":maxhp", ":abs", 100), (val_div, ":maxhp", ":pct"), (val_max, ":maxhp", 20),
+  # cloth stops nothing; armour worth {ARMOR_FULL} or more protects as much as CS2 kevlar does against this gun, less armour proportionally less
+  (store_mul, ":cover", ":armor", 1000), (val_div, ":cover", {ARMOR_FULL}), (val_clamp, ":cover", 0, 1001),
+  (item_get_slot, ":ar", ":w", {SL['armor']}), (store_sub, ":stop", 1000, ":ar"), (val_max, ":stop", 0),
+  (val_mul, ":stop", ":cover"), (val_div, ":stop", 1000), (store_sub, ":pass", 1000, ":stop"),
+  (val_mul, ":dmg", ":pass"), (val_div, ":dmg", 1000),
+  # CS2 damage is out of 100 health: people take it as that share of their own health; horses as a share of {HORSE_BASE}, so a big horse takes more bullets
+  (try_begin), (eq, ":human", 1),
+    (store_agent_hit_points, ":pct", ":v", 0), (store_agent_hit_points, ":abs", ":v", 1), (val_max, ":pct", 1),
+    (store_mul, ":maxhp", ":abs", 100), (val_div, ":maxhp", ":pct"), (val_max, ":maxhp", 20),
+  (else_try),
+    (assign, ":maxhp", {HORSE_BASE}),
+  (try_end),
   (val_mul, ":dmg", ":maxhp"), (val_div, ":dmg", 10000), (val_max, ":dmg", 1),
-  (try_begin), (eq, "$cs2_debug", 1), (assign, reg1, ":bone"), (assign, reg2, ":dmg"), (assign, reg3, ":dist"), (display_message, "@hit bone {{reg1}} dmg {{reg2}} dist {{reg3}}"), (try_end),
+  (try_begin), (eq, "$cs2_debug", 1), (assign, reg1, ":bone"), (assign, reg2, ":dmg"), (assign, reg3, ":dist"), (assign, reg4, ":armor"), (display_message, "@hit bone {{reg1}} dmg {{reg2}} dist {{reg3}} armour {{reg4}}"), (try_end),
   (set_trigger_result, ":dmg"),
   ])
 
