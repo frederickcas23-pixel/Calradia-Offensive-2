@@ -334,6 +334,7 @@ for w in W:
     init += f'  (item_set_slot, "itm_{w["id"]}", {SL["snd"]}, "snd_{w["sound"]}"),\n'
 DEFAULT_AMMO = AM[0]['id']
 ARMOR_FULL, HORSE_BASE = 50, 60
+DAMAGE_SCALE = sheet('weapons').get('damage_scale', 1)
 CS2_DEBUG = int(os.environ.get('CS2_DEBUG', '0'))
 gun = f"""
 cs2_before_start = (ti_before_mission_start, 0, 0, [], [
@@ -508,7 +509,7 @@ cs2_hit = (ti_on_agent_hit, 0, 0, [], [
   (assign, ":w", reg0),
   (store_trigger_param_1, ":v"), (store_trigger_param_2, ":a"), (store_trigger_param, ":bone", 4),
   (ge, ":w", 0), (item_get_slot, ":dmg", ":w", {SL['dmg']}), (gt, ":dmg", 0),
-  (val_mul, ":dmg", 100),
+  (val_mul, ":dmg", {round(100 * DAMAGE_SCALE)}),
   (agent_get_position, pos5, ":a"), (agent_get_position, pos6, ":v"), (get_distance_between_positions, ":dist", pos5, pos6),
   (item_get_slot, ":rm", ":w", {SL['rm']}),
   (store_div, ":steps", ":dist", 1270), (val_min, ":steps", 20),
@@ -554,7 +555,31 @@ cs2_hit = (ti_on_agent_hit, 0, 0, [], [
 for cs2_mt in mission_templates: cs2_mt[5].extend([cs2_before_start, cs2_fire, cs2_hit])
 """
 s_ = rd('module_mission_templates.py'); wr('module_mission_templates.py', s_ + gun)
-hud = """
+# Crosshair geometry. Presentation units are 1000 x 750 stretched over the whole screen, so on a 16:9 screen one x unit is
+# 4/3 as wide as one y unit; XA corrects for that so all four lines are the same length and thickness on 16:9.
+XA = 0.75
+LEN, THICK, EDGE = 9, 2, 1        # line length, thickness and black edge, in y units
+def sz(x_units, y_units): return f'(position_set_x, pos1, {round(x_units * XA * 50)}), (position_set_y, pos1, {round(y_units * 50)})'
+pieces = [('l', LEN, THICK), ('r', LEN, THICK), ('u', THICK, LEN), ('d', THICK, LEN), ('c', THICK, THICK)]
+make = ''
+for n, wx, wy in pieces:
+    make += f'      (create_mesh_overlay, "$cs2_xb_{n}", "mesh_white_plane"), {sz(wx + 2 * EDGE, wy + 2 * EDGE)}, (overlay_set_size, "$cs2_xb_{n}", pos1), (overlay_set_color, "$cs2_xb_{n}", 0x000000),\n'
+for n, wx, wy in pieces:
+    make += f'      (create_mesh_overlay, "$cs2_xg_{n}", "mesh_white_plane"), {sz(wx, wy)}, (overlay_set_size, "$cs2_xg_{n}", pos1), (overlay_set_color, "$cs2_xg_{n}", 0x00FF00),\n'
+def place(n, x_expr_ops, y_expr_ops, wx, wy):
+    # x_expr_ops / y_expr_ops leave the piece's left / bottom edge (y units from the centre) in :px / :py
+    return (f'        {x_expr_ops} {y_expr_ops}\n'
+            f'        (store_mul, ":x", ":px", {round(XA * 100)}), (val_add, ":x", 50000), (store_mul, ":y", ":py", 100), (val_add, ":y", 37500),\n'
+            f'        (position_set_x, pos1, ":x"), (position_set_y, pos1, ":y"), (overlay_set_position, "$cs2_xg_{n}", pos1),\n'
+            f'        (val_sub, ":x", {round(EDGE * XA * 100)}), (val_sub, ":y", {EDGE * 100}),\n'
+            f'        (position_set_x, pos1, ":x"), (position_set_y, pos1, ":y"), (overlay_set_position, "$cs2_xb_{n}", pos1),\n')
+H = THICK // 2
+run = (place('l', f'(store_mul, ":px", ":g", -1), (val_sub, ":px", {LEN}),', f'(assign, ":py", {-H}),', LEN, THICK)
+     + place('r', '(assign, ":px", ":g"),', f'(assign, ":py", {-H}),', LEN, THICK)
+     + place('u', f'(assign, ":px", {-H}),', '(assign, ":py", ":g"),', THICK, LEN)
+     + place('d', f'(assign, ":px", {-H}),', f'(store_mul, ":py", ":g", -1), (val_sub, ":py", {LEN}),', THICK, LEN)
+     + place('c', f'(assign, ":px", {-H}),', f'(assign, ":py", {-H}), (try_begin), (eq, "$cs2_xhair", 0), (assign, ":py", 5000), (try_end),', THICK, THICK))
+hud = f"""
   ("cs2_hud", prsntf_read_only|prsntf_manual_end_only, 0, [
     (ti_on_presentation_load, [
       (set_fixed_point_multiplier, 1000),
@@ -562,15 +587,8 @@ hud = """
       (overlay_set_color, "$cs2_hud_overlay", 0xFFFFFF),
       (position_set_x, pos1, 965), (position_set_y, pos1, 135), (overlay_set_position, "$cs2_hud_overlay", pos1),
       (position_set_x, pos1, 1600), (position_set_y, pos1, 1600), (overlay_set_size, "$cs2_hud_overlay", pos1),
-      # CS2-style crosshair: four green lines, 2 wide and 9 long, around the screen centre (500, 375)
-      (create_mesh_overlay, "$cs2_xh_l", "mesh_white_plane"), (create_mesh_overlay, "$cs2_xh_r", "mesh_white_plane"),
-      (create_mesh_overlay, "$cs2_xh_u", "mesh_white_plane"), (create_mesh_overlay, "$cs2_xh_d", "mesh_white_plane"),
-      (position_set_x, pos1, 450), (position_set_y, pos1, 100),
-      (overlay_set_size, "$cs2_xh_l", pos1), (overlay_set_size, "$cs2_xh_r", pos1),
-      (position_set_x, pos1, 100), (position_set_y, pos1, 450),
-      (overlay_set_size, "$cs2_xh_u", pos1), (overlay_set_size, "$cs2_xh_d", pos1),
-      (overlay_set_color, "$cs2_xh_l", 0x00FF00), (overlay_set_color, "$cs2_xh_r", 0x00FF00), (overlay_set_color, "$cs2_xh_u", 0x00FF00), (overlay_set_color, "$cs2_xh_d", 0x00FF00),
-      (presentation_set_duration, 999999),
+      # CS2-style crosshair: four equal green lines and a centre dot, each on a black edge (black pieces first, so they sit underneath)
+{make}      (presentation_set_duration, 999999),
       ]),
     (ti_on_presentation_run, [
       (try_begin), (lt, "$cs2_hud_clip", 0), (eq, "$cs2_xhair", 0), (presentation_set_duration, 0),
@@ -579,15 +597,13 @@ hud = """
         (try_begin), (lt, "$cs2_hud_clip", 0), (overlay_set_text, "$cs2_hud_overlay", "@ "),
         (else_try),
           (assign, reg1, "$cs2_hud_clip"), (assign, reg2, "$cs2_hud_reserve"),
-          (try_begin), (gt, "$cs2_reload_end", 0), (overlay_set_text, "$cs2_hud_overlay", "@Reloading  {reg1} / {reg2}"),
-          (else_try), (overlay_set_text, "$cs2_hud_overlay", "@{reg1} / {reg2}"), (try_end),
+          (try_begin), (gt, "$cs2_reload_end", 0), (overlay_set_text, "$cs2_hud_overlay", "@Reloading  {{reg1}} / {{reg2}}"),
+          (else_try), (overlay_set_text, "$cs2_hud_overlay", "@{{reg1}} / {{reg2}}"), (try_end),
         (try_end),
         (assign, ":g", "$cs2_xhair_gap"),
         (try_begin), (eq, "$cs2_xhair", 0), (assign, ":g", 5000), (try_end),  # off screen
-        (store_sub, ":x", 500, ":g"), (val_sub, ":x", 9), (position_set_x, pos1, ":x"), (position_set_y, pos1, 374), (overlay_set_position, "$cs2_xh_l", pos1),
-        (store_add, ":x", 500, ":g"), (position_set_x, pos1, ":x"), (overlay_set_position, "$cs2_xh_r", pos1),
-        (store_add, ":y", 375, ":g"), (position_set_x, pos1, 499), (position_set_y, pos1, ":y"), (overlay_set_position, "$cs2_xh_u", pos1),
-        (store_sub, ":y", 375, ":g"), (val_sub, ":y", 9), (position_set_y, pos1, ":y"), (overlay_set_position, "$cs2_xh_d", pos1),
+        (set_fixed_point_multiplier, 100000),  # positions to a hundredth of a unit, so the black edge is even all round
+{run}        (set_fixed_point_multiplier, 1000),
       (try_end),
       ]),
     ]),

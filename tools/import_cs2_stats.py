@@ -43,4 +43,4 @@ for w in d['rows']:
 d['_doc'] = ("One row per CS2 weapon item. cs2 = numbers copied from Counter-Strike 2's own weapon data by tools/import_cs2_stats.py; they drive the "
              "scripted fire (rate, automatic fire, spread, recoil, pellets) and the damage model (damage, headshot, armour, range falloff). "
              "damage/accuracy/speed/shoot_speed are the native Warband fields the AI and the item card use. asset -> assets.json id. sound -> sounds.json id.")
-open(P, 'w').write('{"_doc":%s,\n "rows":[\n' % json.dumps(d['_doc']) + ',\n'.join(' ' + json.dumps(r) for r in d['rows']) + '\n ]}\n')
+open(P, 'w').write('{"_doc":%s,\n "damage_scale":%s,\n "rows":[\n' % (json.dumps(d['_doc']), json.dumps(d.get('damage_scale', 1))) + ',\n'.join(' ' + json.dumps(r) for r in d['rows']) + '\n ]}\n')
