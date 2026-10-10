@@ -1,6 +1,6 @@
 {
  "_doc": "The mercenary start. No character creator: the player picks a look and is placed on the map next to that faction's capital, neutral to everyone. build = preset attributes, skills and proficiencies added to the blank player.",
- "gold": 1200,
+ "gold": 20000,
  "rows": [
   {
    "id": "look_t",
