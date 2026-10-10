@@ -1,10 +1,10 @@
 {
- "_doc": "The mercenary start. One row per look the player can pick; both leave the player neutral to every faction.",
+ "_doc": "The mercenary start. No character creator: the player picks a look and is placed on the map next to that faction's capital, neutral to everyone. build = preset attributes, skills and proficiencies added to the blank player.",
  "gold": 1200,
  "rows": [
   {
    "id": "look_t",
-   "label": "Dress as a Phoenix fighter (Terrorist look).",
+   "label": "Arrive as a Phoenix fighter, outside the Terrorist capital of Durquba.",
    "body": "cs2_t_suit",
    "head": "cs2_t_head",
    "gloves": "cs2_t_gloves",
@@ -12,11 +12,12 @@
     "cs2_glock",
     "cs2_ammo_pistol",
     "cs2_knife_t"
-   ]
+   ],
+   "spawn": "town_20"
   },
   {
    "id": "look_ct",
-   "label": "Dress as an SAS operator (Counter-Terrorist look).",
+   "label": "Arrive as an SAS operator, outside the Counter-Terrorist capital of Dhirim.",
    "body": "cs2_ct_suit",
    "head": "cs2_ct_head",
    "gloves": "cs2_ct_gloves",
@@ -24,7 +25,31 @@
     "cs2_usp",
     "cs2_ammo_pistol",
     "cs2_knife_ct"
-   ]
+   ],
+   "spawn": "town_16"
   }
- ]
+ ],
+ "build": {
+  "attributes": {
+   "ca_strength": 5,
+   "ca_agility": 7,
+   "ca_intelligence": 4,
+   "ca_charisma": 4
+  },
+  "skills": {
+   "skl_ironflesh": 3,
+   "skl_athletics": 4,
+   "skl_weapon_master": 3,
+   "skl_power_strike": 2,
+   "skl_leadership": 2,
+   "skl_inventory_management": 2,
+   "skl_trade": 1,
+   "skl_first_aid": 1,
+   "skl_riding": 1
+  },
+  "proficiencies": {
+   "wpt_firearm": 110,
+   "wpt_one_handed_weapon": 70
+  }
+ }
 }

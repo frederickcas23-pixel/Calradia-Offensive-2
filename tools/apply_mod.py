@@ -215,35 +215,41 @@ after(S, '          (troop_add_merchandise_with_faction, ":cur_merchant", ":cur_
 # ---------------- simple triggers
 sub1('module_simple_triggers.py', '     (store_add, ":fac_kingdom_6_plus_one", "fac_kingdom_6", 1),', '     (assign, ":fac_kingdom_6_plus_one", kingdoms_end),')
 
-# ---------------- game menus: mercenary start
+# ---------------- game menus: mercenary start (no character creator)
 M = 'module_game_menus.py'
-s = rd(M); a = s.index('  ("start_phase_2",mnf_disable_all_keys,'); b = s.index('  ("start_game_1"', a) if '  ("start_game_1"' in s[a:] else None
-blk_end = s.index('\n  ),\n', a) + 6
-blk = s[a:blk_end]; n = blk.count('(jump_to_menu, "mnu_start_phase_2_5")'); assert n == 6, n
-s = s[:a] + blk.replace('(jump_to_menu, "mnu_start_phase_2_5")', '(jump_to_menu, "mnu_cs2_choose_look")') + s[blk_end:]
+s = rd(M); a = s.index('  ("start_game_0",'); blk_end = s.index('\n  ),\n', a) + 6
+blk = s[a:blk_end]; assert blk.count('(jump_to_menu, "mnu_start_game_1")') == 1
+s = s[:a] + blk.replace('(jump_to_menu, "mnu_start_game_1")', '(jump_to_menu, "mnu_cs2_choose_look")').replace(
+    'Before beginning the game you must create your character.', 'You arrive as a gun for hire.') + s[blk_end:]
+B = ST['build']
+build = ''.join(f'         (troop_raise_attribute, "trp_player", {k}, {v}),\n' for k, v in B['attributes'].items()) \
+      + ''.join(f'         (troop_raise_skill, "trp_player", {k}, {v}),\n' for k, v in B['skills'].items()) \
+      + ''.join(f'         (troop_raise_proficiency_linear, "trp_player", {k}, {v}),\n' for k, v in B['proficiencies'].items())
 opts = ''
 for r in ST['rows']:
     sets = [('ek_body', r['body']), ('ek_head', r['head']), ('ek_gloves', r['gloves'])] + [(f'ek_item_{i}', w) for i, w in enumerate(r['weapons'])]
-    opts += f'''      ("{r["id"]}",[],"{r["label"]}",
+    opts += f"""      ("{r["id"]}",[],"{r["label"]}",
        [
-         (try_for_range, ":cs2_slot", ek_item_0, ek_horse),
-           (troop_get_inventory_slot, ":cs2_old", "trp_player", ":cs2_slot"),
-           (ge, ":cs2_old", 0),
-           (troop_set_inventory_slot, "trp_player", ":cs2_slot", -1),
-           (troop_add_item, "trp_player", ":cs2_old"),
-         (try_end),
-''' + ''.join(f'         (troop_set_inventory_slot, "trp_player", {slot}, "itm_{it}"),\n' for slot, it in sets) + f'''         (troop_add_gold, "trp_player", {ST["gold"]}),
-         (jump_to_menu, "mnu_start_phase_2_5"),
+         (troop_set_type, "trp_player", 0),
+         (assign, "$character_gender", tf_male),
+{build}""" + ''.join(f'         (troop_set_inventory_slot, "trp_player", {slot}, "itm_{it}"),\n' for slot, it in sets) + f"""         (troop_add_gold, "trp_player", {ST["gold"]}),
+         (assign, "$current_town", "p_{r["spawn"]}"),
+         (assign, "$g_starting_town", "$current_town"),
+         (assign, "$current_startup_quest_phase", 4),
+         (call_script, "script_player_arrived"),
+         (party_set_morale, "p_main_party", 100),
+         (party_relocate_near_party, "p_main_party", "$g_starting_town", 2),
+         (change_screen_return),
        ]),
-'''
-menu = f'''  ("cs2_choose_look",mnf_disable_all_keys,
-    "You arrive as a gun for hire. Two armed factions from another war have carved out territory here: the Terrorists in the southern desert and the Counter-Terrorists in the heartland. Neither knows you yet, and both are hiring. How do you look when you walk in?",
+"""
+menu = f"""  ("cs2_choose_look",mnf_disable_all_keys,
+    "Two armed factions from another war have carved out territory in Calradia: the Terrorists in the southern desert and the Counter-Terrorists in the heartland. Neither knows you yet, and both are hiring. Where do you walk in?",
     "none",
     [],
     [
 {opts}    ]
   ),
-'''
+"""
 i = s.rindex(']'); s = s[:i] + menu + s[i:]
 wr(M, s)
 

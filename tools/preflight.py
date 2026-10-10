@@ -68,6 +68,7 @@ cent = [c for f in rows('factions') for c in f['towns'] + f['castles']]
 need(len(cent) == len(set(cent)), 'a centre is given to both factions')
 for r in S['start']['rows']:
     for it in [r['body'], r['head'], r['gloves']] + r['weapons']: need(it in items, f'start[{r["id"]}] -> {it}')
+    need(r['spawn'] in nat_parties, f'start[{r["id"]}].spawn -> {r["spawn"]}')
 for h in rows('hooks'):
     for s_ in h['sheet'].split(','): need(s_ in S, f'hooks[{h["id"]}].sheet -> {s_}')
     need(h['verified'] in ('build', 'devrun', 'ingame'), f'hooks[{h["id"]}].verified')
