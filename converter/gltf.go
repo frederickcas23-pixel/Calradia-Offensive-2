@@ -28,8 +28,11 @@ type gltfDoc struct {
 	Materials []struct {
 		Name string `json:"name"`
 		PBR  struct {
-			BaseColorTexture *struct{ Index int } `json:"baseColorTexture"`
+			BaseColorTexture         *struct{ Index int } `json:"baseColorTexture"`
+			MetallicRoughnessTexture *struct{ Index int } `json:"metallicRoughnessTexture"`
 		} `json:"pbrMetallicRoughness"`
+		NormalTexture    *struct{ Index int } `json:"normalTexture"`
+		OcclusionTexture *struct{ Index int } `json:"occlusionTexture"`
 	} `json:"materials"`
 	Meshes []struct {
 		Name       string `json:"name"`
@@ -44,6 +47,7 @@ type gltfDoc struct {
 // Prim is one glTF primitive in glTF space (metres, Y up).
 type Prim struct {
 	MeshName, MatName, TexFile string
+	NrmFile, AOFile, RoughFile string // optional companions of the colour texture
 	Pos, Nrm                   []V3
 	UV                         [][2]float64
 	Joints                     [][4]int
@@ -158,11 +162,19 @@ func LoadGLTF(path string) ([]*Prim, error) {
 			if pr.Material != nil && *pr.Material < len(g.Materials) {
 				mat := g.Materials[*pr.Material]
 				p.MatName = strings.TrimSuffix(filepath.Base(strings.ReplaceAll(mat.Name, "\\", "/")), ".vmat")
-				if bc := mat.PBR.BaseColorTexture; bc != nil && bc.Index < len(g.Textures) {
-					if src := g.Textures[bc.Index].Source; src < len(g.Images) {
-						p.TexFile = filepath.Join(dir, g.Images[src].URI)
+				img := func(t *struct{ Index int }) string {
+					if t == nil || t.Index >= len(g.Textures) {
+						return ""
 					}
+					if src := g.Textures[t.Index].Source; src < len(g.Images) {
+						return filepath.Join(dir, g.Images[src].URI)
+					}
+					return ""
 				}
+				p.TexFile = img(mat.PBR.BaseColorTexture)
+				p.NrmFile = img(mat.NormalTexture)
+				p.AOFile = img(mat.OcclusionTexture)
+				p.RoughFile = img(mat.PBR.MetallicRoughnessTexture)
 			}
 			pi, ok := pr.Attributes["POSITION"]
 			if !ok || pr.Indices == nil {

@@ -10,6 +10,7 @@ import (
 )
 
 // LoadRGBA decodes a PNG and box-filters it down until neither side exceeds maxSide.
+// The pixels keep their plain (not alpha-multiplied) colours and come back opaque: CS2 keeps masks in the alpha channel of colour textures.
 func LoadRGBA(path string, maxSide int) (*image.RGBA, error) {
 	f, err := os.Open(path)
 	if err != nil {
@@ -21,13 +22,70 @@ func LoadRGBA(path string, maxSide int) (*image.RGBA, error) {
 		return nil, err
 	}
 	b := src.Bounds()
-	img := image.NewRGBA(image.Rect(0, 0, b.Dx(), b.Dy()))
-	draw.Draw(img, img.Bounds(), src, b.Min, draw.Src)
+	n := image.NewNRGBA(image.Rect(0, 0, b.Dx(), b.Dy()))
+	draw.Draw(n, n.Bounds(), src, b.Min, draw.Src)
+	for i := 3; i < len(n.Pix); i += 4 {
+		n.Pix[i] = 255
+	}
+	img := &image.RGBA{Pix: n.Pix, Stride: n.Stride, Rect: n.Rect}
 	for img.Bounds().Dx() > maxSide || img.Bounds().Dy() > maxSide {
 		img = halve(img)
 	}
 	return img, nil
 }
+
+// build makes the image for one DDS.
+func (j texJob) build() (*image.RGBA, error) {
+	if j.Kind == "flat" {
+		img := image.NewRGBA(image.Rect(0, 0, 4, 4))
+		for i := 0; i < len(img.Pix); i += 4 {
+			img.Pix[i], img.Pix[i+1], img.Pix[i+2], img.Pix[i+3] = 128, 128, 255, 255
+		}
+		return img, nil
+	}
+	img, err := LoadRGBA(j.Src, j.Max)
+	if err != nil {
+		return nil, err
+	}
+	w, h := img.Bounds().Dx(), img.Bounds().Dy()
+	switch j.Kind {
+	case "color":
+		if j.AO == "" {
+			break
+		}
+		ao, err := LoadRGBA(j.AO, j.Max)
+		if err != nil {
+			break // colour alone is still right
+		}
+		aw, ah := ao.Bounds().Dx(), ao.Bounds().Dy()
+		for y := 0; y < h; y++ {
+			for x := 0; x < w; x++ {
+				k := 128 + int(ao.Pix[ao.PixOffset(x*aw/w, y*ah/h)])/2 // half strength: CS2 only shades ambient light with it
+				o := img.PixOffset(x, y)
+				for c := 0; c < 3; c++ {
+					img.Pix[o+c] = uint8(int(img.Pix[o+c]) * k / 255)
+				}
+			}
+		}
+	case "normal":
+		if flipNormalGreen {
+			for i := 1; i < len(img.Pix); i += 4 {
+				img.Pix[i] = 255 - img.Pix[i]
+			}
+		}
+	case "spec":
+		for i := 0; i < len(img.Pix); i += 4 {
+			smooth := 1 - float64(img.Pix[i])/255
+			metal := float64(img.Pix[i+1]) / 255
+			v := uint8(255 * smooth * smooth * (0.3 + 0.7*metal))
+			img.Pix[i], img.Pix[i+1], img.Pix[i+2] = v, v, v
+		}
+	}
+	return img, nil
+}
+
+// flipNormalGreen turns CS2's normal maps into the up/down sense Warband's bump shaders expect.
+const flipNormalGreen = false
 
 func halve(src *image.RGBA) *image.RGBA {
 	w, h := src.Bounds().Dx(), src.Bounds().Dy()

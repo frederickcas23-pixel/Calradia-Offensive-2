@@ -19,7 +19,7 @@ import (
 	"time"
 )
 
-const toolVersion = "0.1.1"
+const toolVersion = "0.3.0"
 
 //go:embed sheets/assets.json sheets/sounds.json
 var sheets embed.FS
@@ -153,13 +153,28 @@ func texName(file string) string {
 
 type converter struct {
 	work, module string
-	textures     map[string]string // dds name -> source png
-	texMax       map[string]int
+	textures     map[string]texJob // dds name -> how to make it
 	mats         map[string]Material
 	meshes       []*Mesh
 }
 
-func (c *converter) material(p *Prim, skinned bool, texMax int) (string, error) {
+// texJob describes one DDS to write. kind: "color" (Src, darkened by AO if present), "normal" (Src), "spec" (made from the roughness/metalness map in Src).
+type texJob struct {
+	Kind, Src, AO string
+	Max           int
+}
+
+func usable(file string) bool {
+	if file == "" {
+		return false
+	}
+	st, err := os.Stat(file)
+	return err == nil && st.Size() > 4096 // skips CS2's 1x1 placeholder textures
+}
+
+// material registers the textures of one CS2 material and returns the Warband material that shows them:
+// colour (with CS2's ambient occlusion baked in), the normal map when CS2 has one, and for weapons a specular map made from CS2 roughness and metalness.
+func (c *converter) material(p *Prim, skinned, cloth bool, texMax int) (string, error) {
 	if p.TexFile == "" {
 		return "", fmt.Errorf("material %s has no colour texture", p.MatName)
 	}
@@ -167,14 +182,30 @@ func (c *converter) material(p *Prim, skinned bool, texMax int) (string, error) 
 		return "", fmt.Errorf("colour texture for %s was not exported (%s)", p.MatName, filepath.Base(p.TexFile))
 	}
 	tn := texName(p.TexFile)
-	c.textures[tn] = p.TexFile
-	c.texMax[tn] = texMax
-	name, shader := tn+"_mat", "iron_shader_Instanced"
-	if skinned {
-		name, shader = tn+"_skin", "iron_shader_skin"
+	job := texJob{Kind: "color", Src: p.TexFile, Max: texMax}
+	if usable(p.AOFile) {
+		job.AO = p.AOFile
 	}
-	c.mats[name] = Material{Name: name, Shader: shader, Diffuse: tn, Flags: 1824, Specular: 16, RGB: [3]float64{5, 5, 5}}
-	return name, nil
+	c.textures[tn] = job
+	bump := "cs2_flat_normal"
+	c.textures[bump] = texJob{Kind: "flat"}
+	if usable(p.NrmFile) {
+		bump = texName(p.NrmFile)
+		c.textures[bump] = texJob{Kind: "normal", Src: p.NrmFile, Max: min(texMax, 1024)}
+	}
+	m := Material{Diffuse: tn, Bump: bump, Flags: 0x720, Specular: 16}
+	switch {
+	case skinned: // cloth and skin: matte, like Warband's own leather and cloth
+		m.Name, m.Shader, m.RGB = tn+"_skin", "standart_shader_skin_bump_nospec_high", [3]float64{2, 2, 2}
+	case !cloth && usable(p.RoughFile):
+		m.SpecMap = texName(p.RoughFile) + "_spec"
+		c.textures[m.SpecMap] = texJob{Kind: "spec", Src: p.RoughFile, Max: min(texMax, 1024)}
+		m.Name, m.Shader, m.Specular, m.RGB = tn+"_mat", "specular_shader_noskin_bump_high_Instanced", 24, [3]float64{10, 10, 10}
+	default:
+		m.Name, m.Shader, m.RGB = tn+"_mat", "standart_shader_bump_nospec_high_Instanced", [3]float64{3, 3, 3}
+	}
+	c.mats[m.Name] = m
+	return m.Name, nil
 }
 
 // canonical converts a decompiler glTF point to the weapon's own frame: (forward, up, right) in metres.
@@ -242,7 +273,7 @@ func (c *converter) weapon(a assetRow, prims []*Prim) error {
 	byMat := map[string]*Mesh{}
 	var order []string
 	for _, p := range chosen {
-		mat, err := c.material(p, false, a.TexMax)
+		mat, err := c.material(p, false, false, a.TexMax)
 		if err != nil {
 			return fmt.Errorf("%s: %w", a.ID, err)
 		}
@@ -290,7 +321,7 @@ func (c *converter) agent(a assetRow, prims []*Prim, dataTxt string, wb *WBSkele
 	}
 	var matErr error
 	parts, err := BuildAgent(prims, rt, a.Out, skip, func(p *Prim, skinned bool) string {
-		n, err := c.material(p, skinned, a.TexMax)
+		n, err := c.material(p, skinned, true, a.TexMax)
 		if err != nil && matErr == nil {
 			matErr = err
 		}
@@ -302,7 +333,7 @@ func (c *converter) agent(a assetRow, prims []*Prim, dataTxt string, wb *WBSkele
 	if matErr != nil {
 		return fmt.Errorf("%s: %w", a.ID, matErr)
 	}
-	for _, l := range [][]*Mesh{parts.Body, parts.Head, parts.GloveL, parts.GloveR} {
+	for _, l := range [][]*Mesh{parts.Body, parts.Head, parts.GloveL, parts.GloveR, parts.Boots} {
 		for _, m := range l {
 			c.meshes = append(c.meshes, m)
 			logf("  %s: %d vertices, %d triangles, material %s", m.Name, len(m.Pos), len(m.Tri), m.Material)
@@ -423,7 +454,7 @@ func run() error {
 	out, _ := runVRF(vrf, "-i", pak, "-f", strings.Join(paths, ","), "-o", mdlDir, "-d", "--gltf_export_format", "gltf", "--gltf_export_materials")
 	os.WriteFile(filepath.Join(work, "vrf_models.log"), []byte(out), 0o644)
 
-	c := &converter{work: work, module: module, textures: map[string]string{}, texMax: map[string]int{}, mats: map[string]Material{}}
+	c := &converter{work: work, module: module, textures: map[string]texJob{}, mats: map[string]Material{}}
 	logf("step 3/5: converting meshes")
 	for _, a := range assets {
 		gl := filepath.Join(mdlDir, filepath.FromSlash(strings.TrimSuffix(a.Vpk, ".vmdl_c")+".gltf"))
@@ -458,7 +489,7 @@ func run() error {
 	}
 	sort.Strings(texNames)
 	for _, t := range texNames {
-		img, err := LoadRGBA(c.textures[t], c.texMax[t])
+		img, err := c.textures[t].build()
 		if err != nil {
 			return fmt.Errorf("texture %s: %w", t, err)
 		}
@@ -496,6 +527,7 @@ func run() error {
 	for _, n := range matNames {
 		mats = append(mats, c.mats[n])
 	}
+	c.meshes = append(c.meshes, emptyBodyMeshes(mats[0].Name)...)
 	if err := WriteBRF(filepath.Join(resDir, "cs2_assets.brf"), texNames, mats, c.meshes); err != nil {
 		return err
 	}
@@ -521,5 +553,32 @@ func main() {
 	if err := run(); err != nil {
 		logf("FAILED: %v", err)
 		os.Exit(1)
+	}
+}
+
+// emptyBodyMeshes are the body parts of the "cs2_agent" skin: one zero-size triangle each, so a CS2 agent's
+// own model is all that is drawn and no Warband head, hands or feet can poke through it.
+func emptyBodyMeshes(material string) []*Mesh {
+	mk := func(name string, at V3, bone int) *Mesh {
+		m := &Mesh{Name: name, Material: material}
+		for i := 0; i < 3; i++ {
+			m.Pos = append(m.Pos, at)
+			m.Nrm = append(m.Nrm, V3{0, 0, 1})
+			m.UV = append(m.UV, [2]float64{0, 0})
+			if bone >= 0 {
+				m.Bones = append(m.Bones, [4]int{bone, -1, -1, -1})
+				m.Weights = append(m.Weights, [4]float64{1, 0, 0, 0})
+			}
+		}
+		m.Tri = [][3]int{{0, 1, 2}}
+		return m
+	}
+	return []*Mesh{
+		mk("cs2_none_body", V3{0, 0, 1}, 0),
+		mk("cs2_none_calf_l", V3{-0.1, 0, 0.3}, 2),
+		mk("cs2_none_calf_r", V3{0.1, 0, 0.3}, 5),
+		mk("cs2_none_handL", V3{0, 0, 0}, -1),
+		mk("cs2_none_handR", V3{0, 0, 0}, -1),
+		mk("cs2_none_head", V3{0, 0, 0}, -1),
 	}
 }

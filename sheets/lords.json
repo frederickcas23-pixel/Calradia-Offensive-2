@@ -15,7 +15,8 @@
     "cs2_knife_t",
     "cs2_ak47",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_t_boots"
    ],
    "attrib": "knight_attrib_4",
    "wp": 220,
@@ -36,7 +37,8 @@
     "cs2_knife_ct",
     "cs2_m4a4",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_ct_boots"
    ],
    "attrib": "knight_attrib_4",
    "wp": 220,
@@ -57,7 +59,8 @@
     "cs2_knife_t",
     "cs2_ak47",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_t_boots"
    ],
    "attrib": "knight_attrib_1",
    "wp": 130,
@@ -78,7 +81,8 @@
     "cs2_knife_t",
     "cs2_ak47",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_t_boots"
    ],
    "attrib": "knight_attrib_2",
    "wp": 160,
@@ -99,7 +103,8 @@
     "cs2_knife_t",
     "cs2_ak47",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_t_boots"
    ],
    "attrib": "knight_attrib_3",
    "wp": 190,
@@ -120,7 +125,8 @@
     "cs2_knife_t",
     "cs2_ak47",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_t_boots"
    ],
    "attrib": "knight_attrib_4",
    "wp": 220,
@@ -141,7 +147,8 @@
     "cs2_knife_t",
     "cs2_ak47",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_t_boots"
    ],
    "attrib": "knight_attrib_5",
    "wp": 250,
@@ -162,7 +169,8 @@
     "cs2_knife_t",
     "cs2_ak47",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_t_boots"
    ],
    "attrib": "knight_attrib_1",
    "wp": 130,
@@ -183,7 +191,8 @@
     "cs2_knife_t",
     "cs2_ak47",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_t_boots"
    ],
    "attrib": "knight_attrib_2",
    "wp": 160,
@@ -204,7 +213,8 @@
     "cs2_knife_t",
     "cs2_ak47",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_t_boots"
    ],
    "attrib": "knight_attrib_3",
    "wp": 190,
@@ -225,7 +235,8 @@
     "cs2_knife_t",
     "cs2_ak47",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_t_boots"
    ],
    "attrib": "knight_attrib_4",
    "wp": 220,
@@ -246,7 +257,8 @@
     "cs2_knife_t",
     "cs2_ak47",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_t_boots"
    ],
    "attrib": "knight_attrib_5",
    "wp": 250,
@@ -267,7 +279,8 @@
     "cs2_knife_t",
     "cs2_ak47",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_t_boots"
    ],
    "attrib": "knight_attrib_1",
    "wp": 130,
@@ -288,7 +301,8 @@
     "cs2_knife_t",
     "cs2_ak47",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_t_boots"
    ],
    "attrib": "knight_attrib_2",
    "wp": 160,
@@ -309,7 +323,8 @@
     "cs2_knife_ct",
     "cs2_m4a4",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_ct_boots"
    ],
    "attrib": "knight_attrib_1",
    "wp": 130,
@@ -330,7 +345,8 @@
     "cs2_knife_ct",
     "cs2_m4a4",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_ct_boots"
    ],
    "attrib": "knight_attrib_2",
    "wp": 160,
@@ -351,7 +367,8 @@
     "cs2_knife_ct",
     "cs2_m4a4",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_ct_boots"
    ],
    "attrib": "knight_attrib_3",
    "wp": 190,
@@ -372,7 +389,8 @@
     "cs2_knife_ct",
     "cs2_m4a4",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_ct_boots"
    ],
    "attrib": "knight_attrib_4",
    "wp": 220,
@@ -393,7 +411,8 @@
     "cs2_knife_ct",
     "cs2_m4a4",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_ct_boots"
    ],
    "attrib": "knight_attrib_5",
    "wp": 250,
@@ -414,7 +433,8 @@
     "cs2_knife_ct",
     "cs2_m4a4",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_ct_boots"
    ],
    "attrib": "knight_attrib_1",
    "wp": 130,
@@ -435,7 +455,8 @@
     "cs2_knife_ct",
     "cs2_m4a4",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_ct_boots"
    ],
    "attrib": "knight_attrib_2",
    "wp": 160,
@@ -456,7 +477,8 @@
     "cs2_knife_ct",
     "cs2_m4a4",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_ct_boots"
    ],
    "attrib": "knight_attrib_3",
    "wp": 190,
@@ -477,7 +499,8 @@
     "cs2_knife_ct",
     "cs2_m4a4",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_ct_boots"
    ],
    "attrib": "knight_attrib_4",
    "wp": 220,
@@ -498,7 +521,8 @@
     "cs2_knife_ct",
     "cs2_m4a4",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_ct_boots"
    ],
    "attrib": "knight_attrib_5",
    "wp": 250,
@@ -519,7 +543,8 @@
     "cs2_knife_ct",
     "cs2_m4a4",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_ct_boots"
    ],
    "attrib": "knight_attrib_1",
    "wp": 130,
@@ -540,7 +565,8 @@
     "cs2_knife_ct",
     "cs2_m4a4",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_ct_boots"
    ],
    "attrib": "knight_attrib_2",
    "wp": 160,
@@ -561,7 +587,8 @@
     "cs2_knife_t",
     "cs2_ak47",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_t_boots"
    ],
    "attrib": "lord_attrib",
    "wp": 220,
@@ -582,7 +609,8 @@
     "cs2_knife_ct",
     "cs2_m4a4",
     "cs2_ammo_rifle",
-    "cs2_deagle"
+    "cs2_deagle",
+    "cs2_ct_boots"
    ],
    "attrib": "lord_attrib",
    "wp": 220,

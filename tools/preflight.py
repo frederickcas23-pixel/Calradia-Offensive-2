@@ -32,7 +32,7 @@ for w in rows('weapons'):
     need(w['sound'] in sounds, f'weapons[{w["id"]}].sound -> {w["sound"]} not in sounds')
     need(set(w['sides']) <= sides, f'weapons[{w["id"]}].sides unknown')
 for a in rows('ammo'): need(set(a['sides']) <= sides, f'ammo[{a["id"]}].sides unknown')
-suffix = {'suit': '_body', 'head': '_head', 'gloves': '_glove'}
+suffix = {'suit': '_body', 'head': '_head', 'gloves': '_glove', 'boots': '_boots'}
 for a in rows('armor'):
     need(a['asset'] in assets, f'armor[{a["id"]}].asset -> {a["asset"]} not in assets')
     need(a['asset'] not in assets or assets[a['asset']]['out'] + suffix[a['part']] == a['mesh'], f'armor[{a["id"]}].mesh {a["mesh"]} is not what asset {a["asset"]} writes')
@@ -67,7 +67,7 @@ for f in rows('factions'):
 cent = [c for f in rows('factions') for c in f['towns'] + f['castles']]
 need(len(cent) == len(set(cent)), 'a centre is given to both factions')
 for r in S['start']['rows']:
-    for it in [r['body'], r['head'], r['gloves']] + r['weapons']: need(it in items, f'start[{r["id"]}] -> {it}')
+    for it in [r['body'], r['head'], r['gloves'], r['boots']] + r['weapons']: need(it in items, f'start[{r["id"]}] -> {it}')
     need(r['spawn'] in nat_parties, f'start[{r["id"]}].spawn -> {r["spawn"]}')
 for h in rows('hooks'):
     for s_ in h['sheet'].split(','): need(s_ in S, f'hooks[{h["id"]}].sheet -> {s_}')

@@ -1,9 +1,11 @@
-{"_doc":"Wearables cut from one CS2 agent model. part: suit = skinned body incl. legs and feet, head = rigid on head bone, gloves = rigid on hand bones (mesh_L/mesh_R).",
+{"_doc":"Wearables cut from one CS2 agent model. part: suit = skinned body and legs, head = rigid on head bone, gloves = rigid on hand bones (mesh_L/mesh_R), boots = skinned feet and shins. Wearing all four leaves no part of the Warband body visible.",
  "rows":[
- {"id":"cs2_t_suit","name":"Phoenix Fatigues","part":"suit","asset":"a_phoenix","mesh":"cs2_phoenix_body","body":30,"leg":22,"head":0,"weight":6,"price":650,"abundance":100,"sides":["t"]},
- {"id":"cs2_t_head","name":"Phoenix Balaclava","part":"head","asset":"a_phoenix","mesh":"cs2_phoenix_head","body":0,"leg":0,"head":22,"weight":0.5,"price":180,"abundance":100,"sides":["t"]},
- {"id":"cs2_t_gloves","name":"Phoenix Gloves","part":"gloves","asset":"a_phoenix","mesh":"cs2_phoenix_glove","body":3,"leg":0,"head":0,"weight":0.3,"price":90,"abundance":100,"sides":["t"]},
- {"id":"cs2_ct_suit","name":"SAS Assault Suit","part":"suit","asset":"a_sas","mesh":"cs2_sas_body","body":42,"leg":26,"head":0,"weight":9,"price":1400,"abundance":100,"sides":["ct"]},
- {"id":"cs2_ct_head","name":"SAS Respirator","part":"head","asset":"a_sas","mesh":"cs2_sas_head","body":0,"leg":0,"head":36,"weight":1.2,"price":420,"abundance":100,"sides":["ct"]},
- {"id":"cs2_ct_gloves","name":"SAS Gloves","part":"gloves","asset":"a_sas","mesh":"cs2_sas_glove","body":4,"leg":0,"head":0,"weight":0.3,"price":110,"abundance":100,"sides":["ct"]}
+ {"id": "cs2_t_suit", "name": "Phoenix Fatigues", "part": "suit", "asset": "a_phoenix", "mesh": "cs2_phoenix_body", "body": 30, "leg": 22, "head": 0, "weight": 6, "price": 650, "abundance": 100, "sides": ["t"]},
+ {"id": "cs2_t_head", "name": "Phoenix Balaclava", "part": "head", "asset": "a_phoenix", "mesh": "cs2_phoenix_head", "body": 0, "leg": 0, "head": 22, "weight": 0.5, "price": 180, "abundance": 100, "sides": ["t"]},
+ {"id": "cs2_t_gloves", "name": "Phoenix Gloves", "part": "gloves", "asset": "a_phoenix", "mesh": "cs2_phoenix_glove", "body": 3, "leg": 0, "head": 0, "weight": 0.3, "price": 90, "abundance": 100, "sides": ["t"]},
+ {"id": "cs2_ct_suit", "name": "SAS Assault Suit", "part": "suit", "asset": "a_sas", "mesh": "cs2_sas_body", "body": 42, "leg": 26, "head": 0, "weight": 9, "price": 1400, "abundance": 100, "sides": ["ct"]},
+ {"id": "cs2_ct_head", "name": "SAS Respirator", "part": "head", "asset": "a_sas", "mesh": "cs2_sas_head", "body": 0, "leg": 0, "head": 36, "weight": 1.2, "price": 420, "abundance": 100, "sides": ["ct"]},
+ {"id": "cs2_ct_gloves", "name": "SAS Gloves", "part": "gloves", "asset": "a_sas", "mesh": "cs2_sas_glove", "body": 4, "leg": 0, "head": 0, "weight": 0.3, "price": 110, "abundance": 100, "sides": ["ct"]},
+ {"id": "cs2_t_boots", "name": "Phoenix Boots", "part": "boots", "asset": "a_phoenix", "mesh": "cs2_phoenix_boots", "body": 0, "leg": 10, "head": 0, "weight": 1.2, "price": 140, "abundance": 100, "sides": ["t"]},
+ {"id": "cs2_ct_boots", "name": "SAS Boots", "part": "boots", "asset": "a_sas", "mesh": "cs2_sas_boots", "body": 0, "leg": 14, "head": 0, "weight": 1.4, "price": 220, "abundance": 100, "sides": ["ct"]}
  ]}

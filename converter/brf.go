@@ -19,6 +19,7 @@ type Mesh struct {
 
 type Material struct {
 	Name, Shader, Diffuse string
+	Bump, SpecMap         string // texture names, "" = none
 	Flags                 uint32
 	Specular              float64
 	RGB                   [3]float64
@@ -54,9 +55,9 @@ func WriteBRF(path string, textures []string, mats []Material, meshes []*Mesh) e
 			b.s(m.Shader)
 			b.s(m.Diffuse)
 			b.s("none")
+			b.s(orNone(m.Bump))
 			b.s("none")
-			b.s("none")
-			b.s("none")
+			b.s(orNone(m.SpecMap))
 			b.f(m.Specular)
 			b.f(m.RGB[0])
 			b.f(m.RGB[1])
@@ -108,16 +109,13 @@ func WriteBRF(path string, textures []string, mats []Material, meshes []*Mesh) e
 			}
 			b.i(0) // no extra vertex-animation frames
 			b.i(len(m.Pos))
+			tan := tangents(m)
 			for vi := range m.Pos {
 				n := m.Nrm[vi]
 				b.i(vi)
 				b.u(0xFFFFFFFF)
 				b.v3(n)
-				t := n.Cross(V3{0, 0, 1})
-				if t.Len() < 1e-6 {
-					t = V3{1, 0, 0}
-				}
-				b.v3(t.Norm())
+				b.v3(tan[vi])
 				b.WriteByte(0)
 				u, v := m.UV[vi][0], m.UV[vi][1]
 				if math.IsNaN(u) || math.IsNaN(v) {
@@ -136,4 +134,45 @@ func WriteBRF(path string, textures []string, mats []Material, meshes []*Mesh) e
 	}
 	b.s("end")
 	return os.WriteFile(path, b.Bytes(), 0o644)
+}
+
+func orNone(s string) string {
+	if s == "" {
+		return "none"
+	}
+	return s
+}
+
+// tangents returns one unit tangent per vertex: the direction in which the texture's U grows, made perpendicular to the normal.
+func tangents(m *Mesh) []V3 {
+	acc := make([]V3, len(m.Pos))
+	for _, t := range m.Tri {
+		p0, p1, p2 := m.Pos[t[0]], m.Pos[t[1]], m.Pos[t[2]]
+		u0, u1, u2 := m.UV[t[0]], m.UV[t[1]], m.UV[t[2]]
+		e1, e2 := p1.Sub(p0), p2.Sub(p0)
+		du1, dv1, du2, dv2 := u1[0]-u0[0], u1[1]-u0[1], u2[0]-u0[0], u2[1]-u0[1]
+		det := du1*dv2 - du2*dv1
+		if math.Abs(det) < 1e-12 {
+			continue
+		}
+		d := e1.Mul(dv2 / det).Sub(e2.Mul(dv1 / det))
+		if l := d.Len(); l > 1e-12 && !math.IsNaN(l) {
+			d = d.Mul(1 / l)
+			for _, vi := range t {
+				acc[vi] = acc[vi].Add(d)
+			}
+		}
+	}
+	for vi := range acc {
+		n := m.Nrm[vi]
+		t := acc[vi].Sub(n.Mul(acc[vi].Dot(n)))
+		if t.Len() < 1e-6 {
+			t = n.Cross(V3{0, 0, 1})
+			if t.Len() < 1e-6 {
+				t = V3{1, 0, 0}
+			}
+		}
+		acc[vi] = t.Norm()
+	}
+	return acc
 }

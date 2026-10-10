@@ -70,6 +70,7 @@ type Retarget struct {
 	bones []boneMap
 	xf    map[string]affine
 	wbIdx map[string]int
+	girth float64
 }
 
 func NewRetarget(src *SrcSkeleton, wb *WBSkeleton) (*Retarget, error) {
@@ -126,6 +127,10 @@ func NewRetarget(src *SrcSkeleton, wb *WBSkeleton) (*Retarget, error) {
 	wp := func(n string) V3 { return wb.Pos[r.wbIdx[n]] }
 
 	// limbs: carry the CS2 segment onto the Warband segment
+	// CS2 agents stand about 1.98 m; Warband's skeleton about 1.75 m. Limb lengths follow the Warband bones, so
+	// girth is scaled by the same overall ratio to keep CS2's proportions instead of a stocky figure.
+	girth := (wp("head")[2] - wp("foot.L")[2]) / (sp("head_0")[2] - sp("ankle_L")[2])
+	r.girth = girth
 	limb := func(cls, s0, s1 string, t0, t1 V3, radial float64) affine {
 		ds, dt := sp(s1).Sub(sp(s0)), t1.Sub(t0)
 		R := RotBetween(ds, dt)
@@ -136,15 +141,15 @@ func NewRetarget(src *SrcSkeleton, wb *WBSkeleton) (*Retarget, error) {
 	footScale := wp("thigh.L")[2] / sp("leg_upper_L")[2]
 	for _, s := range []string{"L", "R"} {
 		ankleT := V3{wp("foot." + s)[0], wp("foot." + s)[1], sp("ankle_" + s)[2] * footScale}
-		limb("thigh."+s, "leg_upper_"+s, "leg_lower_"+s, wp("thigh."+s), wp("calf."+s), 1)
-		limb("calf."+s, "leg_lower_"+s, "ankle_"+s, wp("calf."+s), ankleT, 1)
+		limb("thigh."+s, "leg_upper_"+s, "leg_lower_"+s, wp("thigh."+s), wp("calf."+s), girth)
+		limb("calf."+s, "leg_lower_"+s, "ankle_"+s, wp("calf."+s), ankleT, girth)
 		r.xf["foot."+s] = affine{A: stretch(Ident(), V3{0, 0, 1}, footScale, footScale), R: Ident(), O: sp("ankle_" + s), T: ankleT}
-		limb("upperarm."+s, "arm_upper_"+s, "arm_lower_"+s, wp("upperarm."+s), wp("forearm."+s), 1)
-		fa := limb("forearm."+s, "arm_lower_"+s, "hand_"+s, wp("forearm."+s), wp("hand."+s), 1)
-		r.xf["hand."+s] = affine{A: fa.R, R: fa.R, O: sp("hand_" + s), T: wp("hand." + s)}
+		limb("upperarm."+s, "arm_upper_"+s, "arm_lower_"+s, wp("upperarm."+s), wp("forearm."+s), girth)
+		fa := limb("forearm."+s, "arm_lower_"+s, "hand_"+s, wp("forearm."+s), wp("hand."+s), girth)
+		r.xf["hand."+s] = affine{A: stretch(fa.R, V3{0, 0, 1}, girth, girth), R: fa.R, O: sp("hand_" + s), T: wp("hand." + s)}
 	}
 	// head: rigid about the head pivot, slightly scaled
-	const headScale = 0.94
+	headScale := girth
 	r.xf["head"] = affine{A: stretch(Ident(), V3{0, 0, 1}, headScale, headScale), R: Ident(), O: sp("head_0"), T: wp("head")}
 	return r, nil
 }
@@ -164,8 +169,9 @@ func (r *Retarget) torso(p V3) V3 {
 		z = zt[1] + (p[2]-zs[1])*(zt[2]-zt[1])/(zs[2]-zs[1])
 	}
 	gx := math.Abs(wp("upperarm.L")[0]-wp("upperarm.R")[0]) / math.Abs(sp("arm_upper_L")[0]-sp("arm_upper_R")[0])
-	gx = math.Min(math.Max(gx, 0.9), 1.2)
-	gy := (gx + (zt[1]-zt[0])/(zs[1]-zs[0])) / 2
+	// keep the trunk no wider than CS2 drew it: the shoulder joints sit slightly outside, which reads better than a broad chest
+	gx = math.Min(math.Max(gx, r.girth), (1+r.girth)/2)
+	gy := r.girth
 	y := wp("abdomen")[1] + (p[1]-sp("pelvis")[1])*gy
 	return V3{p[0] * gx, y, z}
 }
@@ -238,11 +244,12 @@ func newBuilder(name, material string) *meshBuilder {
 }
 
 // AgentParts are the Warband meshes cut from one agent.
-type AgentParts struct{ Body, Head, GloveL, GloveR []*Mesh }
+type AgentParts struct{ Body, Head, GloveL, GloveR, Boots []*Mesh }
 
 // BuildAgent converts the third-person primitives of one agent. matFor returns the Warband material for a CS2 material (skinned or rigid).
 func BuildAgent(prims []*Prim, rt *Retarget, outBase string, skip map[string]bool, matFor func(p *Prim, skinned bool) string) (*AgentParts, error) {
 	headB, handL, handR := rt.wbIdx["head"], rt.wbIdx["hand.L"], rt.wbIdx["hand.R"]
+	lower := []int{rt.wbIdx["calf.L"], rt.wbIdx["foot.L"], rt.wbIdx["calf.R"], rt.wbIdx["foot.R"]}
 	type key struct{ part, mat string }
 	builders := map[key]*meshBuilder{}
 	var order []key
@@ -288,11 +295,26 @@ func BuildAgent(prims []*Prim, rt *Retarget, outBase string, skip map[string]boo
 				part = "gloveL"
 			case isGloves && all(handR):
 				part = "gloveR"
+			default:
+				// shins and feet become the boots item, so Warband's own bare feet are never drawn
+				boot := true
+				for _, v := range t {
+					w := 0.0
+					for _, b := range lower {
+						w += weightOf(bones[v], wts[v], b)
+					}
+					if w < 0.5 {
+						boot = false
+					}
+				}
+				if boot {
+					part = "boots"
+				}
 			}
 			k := key{part, p.MatName}
 			b, ok := builders[k]
 			if !ok {
-				b = newBuilder("", matFor(p, part == "body"))
+				b = newBuilder("", matFor(p, part == "body" || part == "boots"))
 				builders[k] = b
 				order = append(order, k)
 			}
@@ -317,7 +339,7 @@ func BuildAgent(prims []*Prim, rt *Retarget, outBase string, skip map[string]boo
 					b.m.Pos = append(b.m.Pos, q)
 					b.m.Nrm = append(b.m.Nrm, qn)
 					b.m.UV = append(b.m.UV, p.UV[v])
-					if part == "body" {
+					if part == "body" || part == "boots" {
 						b.m.Bones = append(b.m.Bones, bones[v])
 						b.m.Weights = append(b.m.Weights, wts[v])
 					}
@@ -331,7 +353,7 @@ func BuildAgent(prims []*Prim, rt *Retarget, outBase string, skip map[string]boo
 		return nil, fmt.Errorf("no third-person meshes found for %s", outBase)
 	}
 	out := &AgentParts{}
-	names := map[string]string{"body": outBase + "_body", "head": outBase + "_head", "gloveL": outBase + "_glove_L", "gloveR": outBase + "_glove_R"}
+	names := map[string]string{"body": outBase + "_body", "head": outBase + "_head", "gloveL": outBase + "_glove_L", "gloveR": outBase + "_glove_R", "boots": outBase + "_boots"}
 	count := map[string]int{}
 	for _, k := range order {
 		b := builders[k]
@@ -352,9 +374,11 @@ func BuildAgent(prims []*Prim, rt *Retarget, outBase string, skip map[string]boo
 			out.GloveL = append(out.GloveL, b.m)
 		case "gloveR":
 			out.GloveR = append(out.GloveR, b.m)
+		case "boots":
+			out.Boots = append(out.Boots, b.m)
 		}
 	}
-	if len(out.Body) == 0 || len(out.Head) == 0 || len(out.GloveL) == 0 || len(out.GloveR) == 0 {
+	if len(out.Body) == 0 || len(out.Head) == 0 || len(out.GloveL) == 0 || len(out.GloveR) == 0 || len(out.Boots) == 0 {
 		return nil, fmt.Errorf("%s: could not cut body/head/gloves (body %d, head %d, left glove %d, right glove %d meshes)", outBase, len(out.Body), len(out.Head), len(out.GloveL), len(out.GloveR))
 	}
 	return out, nil

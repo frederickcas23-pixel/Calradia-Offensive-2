@@ -13,7 +13,8 @@
     "cs2_ammo_pistol",
     "cs2_knife_t"
    ],
-   "spawn": "town_20"
+   "spawn": "town_20",
+   "boots": "cs2_t_boots"
   },
   {
    "id": "look_ct",
@@ -26,7 +27,8 @@
     "cs2_ammo_pistol",
     "cs2_knife_ct"
    ],
-   "spawn": "town_16"
+   "spawn": "town_16",
+   "boots": "cs2_ct_boots"
   }
  ],
  "build": {
