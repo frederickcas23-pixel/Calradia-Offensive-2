@@ -1,0 +1,11 @@
+{"_doc":"Warband sound entries. files = CS2 vsnd paths read from the player's install; each becomes <id>_<n>.wav in the module's Sounds folder.",
+ "rows":[
+ {"id":"cs2_glock_fire","flags":"sf_priority_10|sf_vol_10","files":["sounds/weapons/glock18/glock_01.vsnd_c","sounds/weapons/glock18/glock_02.vsnd_c"]},
+ {"id":"cs2_usp_fire","flags":"sf_priority_10|sf_vol_8","files":["sounds/weapons/usp/usp_01.vsnd_c","sounds/weapons/usp/usp_02.vsnd_c","sounds/weapons/usp/usp_03.vsnd_c"]},
+ {"id":"cs2_deagle_fire","flags":"sf_priority_10|sf_vol_10","files":["sounds/weapons/deagle/deagle_01.vsnd_c","sounds/weapons/deagle/deagle_02.vsnd_c"]},
+ {"id":"cs2_nova_fire","flags":"sf_priority_10|sf_vol_10","files":["sounds/weapons/nova/nova-1.vsnd_c"]},
+ {"id":"cs2_ak47_fire","flags":"sf_priority_10|sf_vol_10","files":["sounds/weapons/ak47/ak47_01.vsnd_c","sounds/weapons/ak47/ak47_02.vsnd_c","sounds/weapons/ak47/ak47_03.vsnd_c","sounds/weapons/ak47/ak47_04.vsnd_c"]},
+ {"id":"cs2_m4a4_fire","flags":"sf_priority_10|sf_vol_10","files":["sounds/weapons/m4a1/m4a1_01.vsnd_c","sounds/weapons/m4a1/m4a1_02.vsnd_c","sounds/weapons/m4a1/m4a1_03.vsnd_c","sounds/weapons/m4a1/m4a1_04.vsnd_c"]},
+ {"id":"cs2_awp_fire","flags":"sf_priority_10|sf_vol_10","files":["sounds/weapons/awp/awp_01.vsnd_c","sounds/weapons/awp/awp_02.vsnd_c"]},
+ {"id":"cs2_knife_stab","flags":"sf_priority_7|sf_vol_8","files":["sounds/weapons/knife/knife_stab.vsnd_c"]}
+ ]}

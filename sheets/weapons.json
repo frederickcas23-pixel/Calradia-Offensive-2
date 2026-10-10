@@ -1,0 +1,12 @@
+{"_doc":"One row per CS2 weapon item. damage is pierce unless melee. asset -> assets.json id. sound -> sounds.json id. ammo_class is flavour only: the engine lets any bullets feed any gun.",
+ "rows":[
+ {"id":"cs2_glock","name":"Glock-18","type":"pistol","asset":"w_glock","mesh":"cs2_glock","damage":38,"accuracy":82,"speed":110,"shoot_speed":180,"clip":20,"weight":0.9,"price":900,"difficulty":0,"abundance":100,"sound":"cs2_glock_fire","sides":["t"],"smoke":6},
+ {"id":"cs2_usp","name":"USP-S","type":"pistol","asset":"w_usp","mesh":"cs2_usp","damage":42,"accuracy":88,"speed":110,"shoot_speed":175,"clip":12,"weight":1.1,"price":1100,"difficulty":0,"abundance":100,"sound":"cs2_usp_fire","sides":["ct"],"smoke":2},
+ {"id":"cs2_deagle","name":"Desert Eagle","type":"pistol","asset":"w_deagle","mesh":"cs2_deagle","damage":62,"accuracy":85,"speed":95,"shoot_speed":200,"clip":7,"weight":1.8,"price":2400,"difficulty":0,"abundance":60,"sound":"cs2_deagle_fire","sides":["t","ct"],"smoke":8},
+ {"id":"cs2_nova","name":"Nova","type":"long","asset":"w_nova","mesh":"cs2_nova","damage":75,"accuracy":60,"speed":80,"shoot_speed":150,"clip":8,"weight":3.2,"price":2600,"difficulty":0,"abundance":70,"sound":"cs2_nova_fire","sides":["t","ct"],"smoke":12},
+ {"id":"cs2_ak47","name":"AK-47","type":"long","asset":"w_ak47","mesh":"cs2_ak47","damage":58,"accuracy":86,"speed":100,"shoot_speed":230,"clip":30,"weight":3.8,"price":5200,"difficulty":0,"abundance":60,"sound":"cs2_ak47_fire","sides":["t"],"smoke":8},
+ {"id":"cs2_m4a4","name":"M4A4","type":"long","asset":"w_m4a4","mesh":"cs2_m4a4","damage":54,"accuracy":90,"speed":105,"shoot_speed":235,"clip":30,"weight":3.4,"price":5800,"difficulty":0,"abundance":60,"sound":"cs2_m4a4_fire","sides":["ct"],"smoke":7},
+ {"id":"cs2_awp","name":"AWP","type":"long","asset":"w_awp","mesh":"cs2_awp","damage":110,"accuracy":99,"speed":60,"shoot_speed":300,"clip":5,"weight":6.0,"price":9500,"difficulty":0,"abundance":25,"sound":"cs2_awp_fire","sides":["t","ct"],"smoke":14},
+ {"id":"cs2_knife_t","name":"Terrorist Knife","type":"knife","asset":"w_knife_t","mesh":"cs2_knife_t","damage":24,"thrust":22,"speed":118,"length":32,"weight":0.4,"price":120,"abundance":100,"sound":"cs2_knife_stab","sides":["t"]},
+ {"id":"cs2_knife_ct","name":"Counter-Terrorist Knife","type":"knife","asset":"w_knife_ct","mesh":"cs2_knife_ct","damage":24,"thrust":22,"speed":118,"length":32,"weight":0.4,"price":120,"abundance":100,"sound":"cs2_knife_stab","sides":["ct"]}
+ ]}

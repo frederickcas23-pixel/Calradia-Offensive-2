@@ -1,0 +1,593 @@
+{
+ "_doc": "Named leaders. role king/lord/pretender decides where the row is inserted in module_troops (order matters to the engine). Names are CS2's own agent characters. fief is a centre given at game start (blank = assigned automatically).",
+ "rows": [
+  {
+   "id": "kingdom_7_lord",
+   "role": "king",
+   "name": "Kingpin Darryl",
+   "short": "Darryl",
+   "kingdom": "kingdom_7",
+   "female": false,
+   "items": [
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves",
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_4",
+   "wp": 220,
+   "skills": "knight_skills_5|knows_trainer_5",
+   "fief": "town_20"
+  },
+  {
+   "id": "kingdom_8_lord",
+   "role": "king",
+   "name": "Commander Ricksaw",
+   "short": "Ricksaw",
+   "kingdom": "kingdom_8",
+   "female": false,
+   "items": [
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves",
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_4",
+   "wp": 220,
+   "skills": "knight_skills_5|knows_trainer_5",
+   "fief": "town_16"
+  },
+  {
+   "id": "knight_7_1",
+   "role": "lord",
+   "name": "Warlord Dragomir",
+   "short": "Dragomir",
+   "kingdom": "kingdom_7",
+   "female": false,
+   "items": [
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves",
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_1",
+   "wp": 130,
+   "skills": "knight_skills_1",
+   "fief": "town_21"
+  },
+  {
+   "id": "knight_7_2",
+   "role": "lord",
+   "name": "Warlord Maximus",
+   "short": "Maximus",
+   "kingdom": "kingdom_7",
+   "female": false,
+   "items": [
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves",
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_2",
+   "wp": 160,
+   "skills": "knight_skills_2",
+   "fief": ""
+  },
+  {
+   "id": "knight_7_3",
+   "role": "lord",
+   "name": "Warlord Rezan the Ready",
+   "short": "Rezan the Ready",
+   "kingdom": "kingdom_7",
+   "female": false,
+   "items": [
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves",
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_3",
+   "wp": 190,
+   "skills": "knight_skills_3",
+   "fief": ""
+  },
+  {
+   "id": "knight_7_4",
+   "role": "lord",
+   "name": "Warlord Blackwolf",
+   "short": "Blackwolf",
+   "kingdom": "kingdom_7",
+   "female": false,
+   "items": [
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves",
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_4",
+   "wp": 220,
+   "skills": "knight_skills_4",
+   "fief": ""
+  },
+  {
+   "id": "knight_7_5",
+   "role": "lord",
+   "name": "Warlord Romanov",
+   "short": "Romanov",
+   "kingdom": "kingdom_7",
+   "female": false,
+   "items": [
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves",
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_5",
+   "wp": 250,
+   "skills": "knight_skills_5",
+   "fief": ""
+  },
+  {
+   "id": "knight_7_6",
+   "role": "lord",
+   "name": "Warlord Slingshot",
+   "short": "Slingshot",
+   "kingdom": "kingdom_7",
+   "female": false,
+   "items": [
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves",
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_1",
+   "wp": 130,
+   "skills": "knight_skills_1",
+   "fief": ""
+  },
+  {
+   "id": "knight_7_7",
+   "role": "lord",
+   "name": "Warlord Osiris",
+   "short": "Osiris",
+   "kingdom": "kingdom_7",
+   "female": false,
+   "items": [
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves",
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_2",
+   "wp": 160,
+   "skills": "knight_skills_2",
+   "fief": ""
+  },
+  {
+   "id": "knight_7_8",
+   "role": "lord",
+   "name": "Warlord Shahmat",
+   "short": "Shahmat",
+   "kingdom": "kingdom_7",
+   "female": false,
+   "items": [
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves",
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_3",
+   "wp": 190,
+   "skills": "knight_skills_3",
+   "fief": ""
+  },
+  {
+   "id": "knight_7_9",
+   "role": "lord",
+   "name": "Warlord Muhlik",
+   "short": "Muhlik",
+   "kingdom": "kingdom_7",
+   "female": false,
+   "items": [
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves",
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_4",
+   "wp": 220,
+   "skills": "knight_skills_4",
+   "fief": ""
+  },
+  {
+   "id": "knight_7_10",
+   "role": "lord",
+   "name": "Warlord Mangos Dabisi",
+   "short": "Mangos Dabisi",
+   "kingdom": "kingdom_7",
+   "female": false,
+   "items": [
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves",
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_5",
+   "wp": 250,
+   "skills": "knight_skills_5",
+   "fief": ""
+  },
+  {
+   "id": "knight_7_11",
+   "role": "lord",
+   "name": "Warlord Arno the Overgrown",
+   "short": "Arno the Overgrown",
+   "kingdom": "kingdom_7",
+   "female": false,
+   "items": [
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves",
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_1",
+   "wp": 130,
+   "skills": "knight_skills_1",
+   "fief": ""
+  },
+  {
+   "id": "knight_7_12",
+   "role": "lord",
+   "name": "Warlord Crasswater",
+   "short": "Crasswater",
+   "kingdom": "kingdom_7",
+   "female": false,
+   "items": [
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves",
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_2",
+   "wp": 160,
+   "skills": "knight_skills_2",
+   "fief": ""
+  },
+  {
+   "id": "knight_8_1",
+   "role": "lord",
+   "name": "Captain Baroud",
+   "short": "Baroud",
+   "kingdom": "kingdom_8",
+   "female": false,
+   "items": [
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves",
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_1",
+   "wp": 130,
+   "skills": "knight_skills_1",
+   "fief": "town_14"
+  },
+  {
+   "id": "knight_8_2",
+   "role": "lord",
+   "name": "Captain Buckshot",
+   "short": "Buckshot",
+   "kingdom": "kingdom_8",
+   "female": false,
+   "items": [
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves",
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_2",
+   "wp": 160,
+   "skills": "knight_skills_2",
+   "fief": ""
+  },
+  {
+   "id": "knight_8_3",
+   "role": "lord",
+   "name": "Captain McCoy",
+   "short": "McCoy",
+   "kingdom": "kingdom_8",
+   "female": false,
+   "items": [
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves",
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_3",
+   "wp": 190,
+   "skills": "knight_skills_3",
+   "fief": ""
+  },
+  {
+   "id": "knight_8_4",
+   "role": "lord",
+   "name": "Captain Fernandez",
+   "short": "Fernandez",
+   "kingdom": "kingdom_8",
+   "female": false,
+   "items": [
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves",
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_4",
+   "wp": 220,
+   "skills": "knight_skills_4",
+   "fief": ""
+  },
+  {
+   "id": "knight_8_5",
+   "role": "lord",
+   "name": "Captain Farlow",
+   "short": "Farlow",
+   "kingdom": "kingdom_8",
+   "female": false,
+   "items": [
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves",
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_5",
+   "wp": 250,
+   "skills": "knight_skills_5",
+   "fief": ""
+  },
+  {
+   "id": "knight_8_6",
+   "role": "lord",
+   "name": "Captain Kask",
+   "short": "Kask",
+   "kingdom": "kingdom_8",
+   "female": false,
+   "items": [
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves",
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_1",
+   "wp": 130,
+   "skills": "knight_skills_1",
+   "fief": ""
+  },
+  {
+   "id": "knight_8_7",
+   "role": "lord",
+   "name": "Captain Bombson",
+   "short": "Bombson",
+   "kingdom": "kingdom_8",
+   "female": false,
+   "items": [
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves",
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_2",
+   "wp": 160,
+   "skills": "knight_skills_2",
+   "fief": ""
+  },
+  {
+   "id": "knight_8_8",
+   "role": "lord",
+   "name": "Captain Beltram",
+   "short": "Beltram",
+   "kingdom": "kingdom_8",
+   "female": false,
+   "items": [
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves",
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_3",
+   "wp": 190,
+   "skills": "knight_skills_3",
+   "fief": ""
+  },
+  {
+   "id": "knight_8_9",
+   "role": "lord",
+   "name": "Captain Syfers",
+   "short": "Syfers",
+   "kingdom": "kingdom_8",
+   "female": false,
+   "items": [
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves",
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_4",
+   "wp": 220,
+   "skills": "knight_skills_4",
+   "fief": ""
+  },
+  {
+   "id": "knight_8_10",
+   "role": "lord",
+   "name": "Captain Ahmad",
+   "short": "Ahmad",
+   "kingdom": "kingdom_8",
+   "female": false,
+   "items": [
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves",
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_5",
+   "wp": 250,
+   "skills": "knight_skills_5",
+   "fief": ""
+  },
+  {
+   "id": "knight_8_11",
+   "role": "lord",
+   "name": "Captain Primeiro",
+   "short": "Primeiro",
+   "kingdom": "kingdom_8",
+   "female": false,
+   "items": [
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves",
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_1",
+   "wp": 130,
+   "skills": "knight_skills_1",
+   "fief": ""
+  },
+  {
+   "id": "knight_8_12",
+   "role": "lord",
+   "name": "Captain Michael",
+   "short": "Michael",
+   "kingdom": "kingdom_8",
+   "female": false,
+   "items": [
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves",
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "knight_attrib_2",
+   "wp": 160,
+   "skills": "knight_skills_2",
+   "fief": ""
+  },
+  {
+   "id": "kingdom_7_pretender",
+   "role": "pretender",
+   "name": "Vypa, Sister of the Revolution",
+   "short": "Vypa",
+   "kingdom": "kingdom_7",
+   "female": true,
+   "items": [
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves",
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "lord_attrib",
+   "wp": 220,
+   "skills": "knight_skills_5",
+   "fief": ""
+  },
+  {
+   "id": "kingdom_8_pretender",
+   "role": "pretender",
+   "name": "Commander Mae",
+   "short": "Mae",
+   "kingdom": "kingdom_8",
+   "female": true,
+   "items": [
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves",
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_deagle"
+   ],
+   "attrib": "lord_attrib",
+   "wp": 220,
+   "skills": "knight_skills_5",
+   "fief": ""
+  }
+ ]
+}

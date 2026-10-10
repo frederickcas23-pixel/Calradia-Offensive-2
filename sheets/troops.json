@@ -1,0 +1,513 @@
+{
+ "_doc": "Regular troops of the two factions. items are item ids from weapons/ammo/armor sheets. upgrades are troop ids in this sheet. role line = in the recruit tree; other roles fill a faction slot.",
+ "rows": [
+  {
+   "id": "t_recruit",
+   "name": "Terrorist Recruit",
+   "plural": "Terrorist Recruits",
+   "side": "t",
+   "role": "line",
+   "faction": "kingdom_7",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 6,
+   "wp_melee": 60,
+   "wp_firearm": 60,
+   "skills": "knows_common|knows_athletics_2",
+   "items": [
+    "cs2_knife_t",
+    "cs2_glock",
+    "cs2_ammo_pistol",
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves"
+   ],
+   "upgrades": [
+    "t_gunman"
+   ]
+  },
+  {
+   "id": "t_gunman",
+   "name": "Terrorist Gunman",
+   "plural": "Terrorist Gunmen",
+   "side": "t",
+   "role": "line",
+   "faction": "kingdom_7",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 12,
+   "wp_melee": 80,
+   "wp_firearm": 95,
+   "skills": "knows_common|knows_athletics_3|knows_ironflesh_1",
+   "items": [
+    "cs2_knife_t",
+    "cs2_glock",
+    "cs2_ammo_pistol",
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves"
+   ],
+   "upgrades": [
+    "t_rifleman",
+    "t_enforcer"
+   ]
+  },
+  {
+   "id": "t_rifleman",
+   "name": "Terrorist Rifleman",
+   "plural": "Terrorist Riflemen",
+   "side": "t",
+   "role": "line",
+   "faction": "kingdom_7",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 18,
+   "wp_melee": 95,
+   "wp_firearm": 125,
+   "skills": "knows_common|knows_athletics_3|knows_ironflesh_2",
+   "items": [
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves"
+   ],
+   "upgrades": [
+    "t_veteran",
+    "t_sniper"
+   ]
+  },
+  {
+   "id": "t_enforcer",
+   "name": "Terrorist Enforcer",
+   "plural": "Terrorist Enforcers",
+   "side": "t",
+   "role": "line",
+   "faction": "kingdom_7",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 18,
+   "wp_melee": 110,
+   "wp_firearm": 115,
+   "skills": "knows_common|knows_athletics_4|knows_ironflesh_3|knows_power_strike_2",
+   "items": [
+    "cs2_knife_t",
+    "cs2_nova",
+    "cs2_ammo_shells",
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves"
+   ],
+   "upgrades": []
+  },
+  {
+   "id": "t_veteran",
+   "name": "Terrorist Veteran",
+   "plural": "Terrorist Veterans",
+   "side": "t",
+   "role": "line",
+   "faction": "kingdom_7",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 24,
+   "wp_melee": 115,
+   "wp_firearm": 155,
+   "skills": "knows_common|knows_athletics_4|knows_ironflesh_4|knows_power_strike_2",
+   "items": [
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_ammo_rifle",
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves"
+   ],
+   "upgrades": [
+    "t_elite"
+   ]
+  },
+  {
+   "id": "t_sniper",
+   "name": "Terrorist Sniper",
+   "plural": "Terrorist Snipers",
+   "side": "t",
+   "role": "line",
+   "faction": "kingdom_7",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 24,
+   "wp_melee": 90,
+   "wp_firearm": 190,
+   "skills": "knows_common|knows_athletics_3|knows_ironflesh_2",
+   "items": [
+    "cs2_knife_t",
+    "cs2_awp",
+    "cs2_ammo_awp",
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves"
+   ],
+   "upgrades": []
+  },
+  {
+   "id": "t_elite",
+   "name": "Phoenix Elite",
+   "plural": "Phoenix Elites",
+   "side": "t",
+   "role": "line",
+   "faction": "kingdom_7",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 30,
+   "wp_melee": 140,
+   "wp_firearm": 200,
+   "skills": "knows_common|knows_athletics_5|knows_ironflesh_6|knows_power_strike_3",
+   "items": [
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_deagle",
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves"
+   ],
+   "upgrades": []
+  },
+  {
+   "id": "t_messenger",
+   "name": "Terrorist Courier",
+   "plural": "Terrorist Couriers",
+   "side": "t",
+   "role": "messenger",
+   "faction": "kingdom_7",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 20,
+   "wp_melee": 100,
+   "wp_firearm": 130,
+   "skills": "knows_common|knows_athletics_5|knows_ironflesh_2",
+   "items": [
+    "cs2_knife_t",
+    "cs2_glock",
+    "cs2_ammo_pistol",
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves"
+   ],
+   "upgrades": []
+  },
+  {
+   "id": "t_deserter",
+   "name": "Terrorist Deserter",
+   "plural": "Terrorist Deserters",
+   "side": "t",
+   "role": "deserter",
+   "faction": "deserters",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 20,
+   "wp_melee": 100,
+   "wp_firearm": 130,
+   "skills": "knows_common|knows_athletics_3|knows_ironflesh_2",
+   "items": [
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves"
+   ],
+   "upgrades": []
+  },
+  {
+   "id": "t_prison_guard",
+   "name": "Prison Guard",
+   "plural": "Prison Guards",
+   "side": "t",
+   "role": "prison_guard",
+   "faction": "kingdom_7",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 25,
+   "wp_melee": 135,
+   "wp_firearm": 150,
+   "skills": "knows_common|knows_ironflesh_3|knows_power_strike_3",
+   "items": [
+    "cs2_knife_t",
+    "cs2_nova",
+    "cs2_ammo_shells",
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves"
+   ],
+   "upgrades": []
+  },
+  {
+   "id": "t_castle_guard",
+   "name": "Castle Guard",
+   "plural": "Castle Guards",
+   "side": "t",
+   "role": "castle_guard",
+   "faction": "kingdom_7",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 25,
+   "wp_melee": 135,
+   "wp_firearm": 150,
+   "skills": "knows_common|knows_ironflesh_3|knows_power_strike_3",
+   "items": [
+    "cs2_knife_t",
+    "cs2_ak47",
+    "cs2_ammo_rifle",
+    "cs2_t_suit",
+    "cs2_t_head",
+    "cs2_t_gloves"
+   ],
+   "upgrades": []
+  },
+  {
+   "id": "ct_recruit",
+   "name": "CT Recruit",
+   "plural": "CT Recruits",
+   "side": "ct",
+   "role": "line",
+   "faction": "kingdom_8",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 6,
+   "wp_melee": 60,
+   "wp_firearm": 60,
+   "skills": "knows_common|knows_athletics_2",
+   "items": [
+    "cs2_knife_ct",
+    "cs2_usp",
+    "cs2_ammo_pistol",
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves"
+   ],
+   "upgrades": [
+    "ct_operator"
+   ]
+  },
+  {
+   "id": "ct_operator",
+   "name": "CT Operator",
+   "plural": "CT Operators",
+   "side": "ct",
+   "role": "line",
+   "faction": "kingdom_8",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 12,
+   "wp_melee": 80,
+   "wp_firearm": 95,
+   "skills": "knows_common|knows_athletics_3|knows_ironflesh_1",
+   "items": [
+    "cs2_knife_ct",
+    "cs2_usp",
+    "cs2_ammo_pistol",
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves"
+   ],
+   "upgrades": [
+    "ct_rifleman",
+    "ct_breacher"
+   ]
+  },
+  {
+   "id": "ct_rifleman",
+   "name": "CT Rifleman",
+   "plural": "CT Riflemen",
+   "side": "ct",
+   "role": "line",
+   "faction": "kingdom_8",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 18,
+   "wp_melee": 95,
+   "wp_firearm": 125,
+   "skills": "knows_common|knows_athletics_3|knows_ironflesh_2",
+   "items": [
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves"
+   ],
+   "upgrades": [
+    "ct_veteran",
+    "ct_sniper"
+   ]
+  },
+  {
+   "id": "ct_breacher",
+   "name": "CT Breacher",
+   "plural": "CT Breachers",
+   "side": "ct",
+   "role": "line",
+   "faction": "kingdom_8",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 18,
+   "wp_melee": 110,
+   "wp_firearm": 115,
+   "skills": "knows_common|knows_athletics_4|knows_ironflesh_3|knows_power_strike_2",
+   "items": [
+    "cs2_knife_ct",
+    "cs2_nova",
+    "cs2_ammo_shells",
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves"
+   ],
+   "upgrades": []
+  },
+  {
+   "id": "ct_veteran",
+   "name": "CT Veteran",
+   "plural": "CT Veterans",
+   "side": "ct",
+   "role": "line",
+   "faction": "kingdom_8",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 24,
+   "wp_melee": 115,
+   "wp_firearm": 155,
+   "skills": "knows_common|knows_athletics_4|knows_ironflesh_4|knows_power_strike_2",
+   "items": [
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_ammo_rifle",
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves"
+   ],
+   "upgrades": [
+    "ct_elite"
+   ]
+  },
+  {
+   "id": "ct_sniper",
+   "name": "CT Sniper",
+   "plural": "CT Snipers",
+   "side": "ct",
+   "role": "line",
+   "faction": "kingdom_8",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 24,
+   "wp_melee": 90,
+   "wp_firearm": 190,
+   "skills": "knows_common|knows_athletics_3|knows_ironflesh_2",
+   "items": [
+    "cs2_knife_ct",
+    "cs2_awp",
+    "cs2_ammo_awp",
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves"
+   ],
+   "upgrades": []
+  },
+  {
+   "id": "ct_elite",
+   "name": "SAS Elite",
+   "plural": "SAS Elites",
+   "side": "ct",
+   "role": "line",
+   "faction": "kingdom_8",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 30,
+   "wp_melee": 140,
+   "wp_firearm": 200,
+   "skills": "knows_common|knows_athletics_5|knows_ironflesh_6|knows_power_strike_3",
+   "items": [
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_deagle",
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves"
+   ],
+   "upgrades": []
+  },
+  {
+   "id": "ct_messenger",
+   "name": "CT Courier",
+   "plural": "CT Couriers",
+   "side": "ct",
+   "role": "messenger",
+   "faction": "kingdom_8",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 20,
+   "wp_melee": 100,
+   "wp_firearm": 130,
+   "skills": "knows_common|knows_athletics_5|knows_ironflesh_2",
+   "items": [
+    "cs2_knife_ct",
+    "cs2_usp",
+    "cs2_ammo_pistol",
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves"
+   ],
+   "upgrades": []
+  },
+  {
+   "id": "ct_deserter",
+   "name": "CT Deserter",
+   "plural": "CT Deserters",
+   "side": "ct",
+   "role": "deserter",
+   "faction": "deserters",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 20,
+   "wp_melee": 100,
+   "wp_firearm": 130,
+   "skills": "knows_common|knows_athletics_3|knows_ironflesh_2",
+   "items": [
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves"
+   ],
+   "upgrades": []
+  },
+  {
+   "id": "ct_prison_guard",
+   "name": "Prison Guard",
+   "plural": "Prison Guards",
+   "side": "ct",
+   "role": "prison_guard",
+   "faction": "kingdom_8",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 25,
+   "wp_melee": 135,
+   "wp_firearm": 150,
+   "skills": "knows_common|knows_ironflesh_3|knows_power_strike_3",
+   "items": [
+    "cs2_knife_ct",
+    "cs2_nova",
+    "cs2_ammo_shells",
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves"
+   ],
+   "upgrades": []
+  },
+  {
+   "id": "ct_castle_guard",
+   "name": "Castle Guard",
+   "plural": "Castle Guards",
+   "side": "ct",
+   "role": "castle_guard",
+   "faction": "kingdom_8",
+   "flags": "tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_gloves|tf_guarantee_ranged",
+   "level": 25,
+   "wp_melee": 135,
+   "wp_firearm": 150,
+   "skills": "knows_common|knows_ironflesh_3|knows_power_strike_3",
+   "items": [
+    "cs2_knife_ct",
+    "cs2_m4a4",
+    "cs2_ammo_rifle",
+    "cs2_ct_suit",
+    "cs2_ct_head",
+    "cs2_ct_gloves"
+   ],
+   "upgrades": []
+  }
+ ]
+}

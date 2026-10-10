@@ -1,0 +1,21 @@
+{"_doc":"One row per new kingdom. Every column is consumed by tools/apply_mod.py.",
+ "rows":[
+ {"id":"kingdom_7","culture":"culture_7","name":"Terrorists","adjective":"Terrorist","color":"0xD9A441","side":"t",
+  "leader":"kingdom_7_lord","pretender":"kingdom_7_pretender","title_male":"Warlord {s0}","title_female":"Warlady {s0}",
+  "banner_mesh":"banner_kingdom_f","capital":"town_20","towns":["town_20","town_21"],"castles":["castle_41","castle_42","castle_44","castle_47"],
+  "tiers":["t_recruit","t_gunman","t_rifleman","t_veteran","t_elite"],
+  "reinforcements":{"a":[["t_recruit",5,10],["t_gunman",2,4]],"b":[["t_rifleman",2,4],["t_enforcer",1,3],["t_gunman",1,3]],"c":[["t_veteran",2,4],["t_sniper",1,2]]},
+  "guard":"t_veteran","prison_guard":"t_prison_guard","castle_guard":"t_castle_guard","messenger":"t_messenger","deserter":"t_deserter",
+  "walker_m":"sarranid_townsman","walker_f":"sarranid_townswoman","music":"mtf_culture_6",
+  "quick_battle":["t_gunman","t_rifleman","t_enforcer","t_sniper","t_veteran","t_elite"],
+  "starting_enemy":"kingdom_8"},
+ {"id":"kingdom_8","culture":"culture_8","name":"Counter-Terrorists","adjective":"Counter-Terrorist","color":"0x4F86D9","side":"ct",
+  "leader":"kingdom_8_lord","pretender":"kingdom_8_pretender","title_male":"Captain {s0}","title_female":"Captain {s0}",
+  "banner_mesh":"banner_kingdom_c","capital":"town_16","towns":["town_16","town_14"],"castles":["castle_20","castle_6","castle_27","castle_24"],
+  "tiers":["ct_recruit","ct_operator","ct_rifleman","ct_veteran","ct_elite"],
+  "reinforcements":{"a":[["ct_recruit",5,10],["ct_operator",2,4]],"b":[["ct_rifleman",2,4],["ct_breacher",1,3],["ct_operator",1,3]],"c":[["ct_veteran",2,4],["ct_sniper",1,2]]},
+  "guard":"ct_veteran","prison_guard":"ct_prison_guard","castle_guard":"ct_castle_guard","messenger":"ct_messenger","deserter":"ct_deserter",
+  "walker_m":"town_walker_1","walker_f":"town_walker_2","music":"mtf_culture_1",
+  "quick_battle":["ct_operator","ct_rifleman","ct_breacher","ct_sniper","ct_veteran","ct_elite"],
+  "starting_enemy":"kingdom_7"}
+ ]}

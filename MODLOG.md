@@ -1,0 +1,16 @@
+# MODLOG — CS2 x Warband mashup (Melty)
+- Host: Warband 1.174 Steam, C:\Program Files (x86)\Steam\steamapps\common\MountBlade Warband (Modules: Native, "Native Firearms" = user's own earlier mod, don't touch)
+- Companion: CS2 1.41.8.9 at ...\common\Counter-Strike Global Offensive (game/csgo/pak01_*.vpk, 505 chunks)
+- Melty reached only via PC browser pane (window.__melty helper); cloud shell blocked. No drafts yet.
+- One-click route: recipe.setup {launch exe with {game:counter-strike-2}, done:{file}} as in counter-strike-los-santos. mode installed, primary mount-and-blade-warband, companion counter-strike-2, mapping to {game}/Modules.
+- No shell on PC: stage files one per call (parallel single calls OK; multi-file calls time out).
+- Tools: dl/vrf = ValveResourceFormat CLI (MIT) linux; dl/cli-windows-x64.zip to bundle. dl/ms = module system 1.171 (int19h mirror, py2). Go 1.24 for converter (GOOS=windows).
+- VRF: `-i pak01_dir.vpk -f <file> -o out -d --gltf_export_format gltf [--gltf_export_materials]`. glTF has JOINTS_0 but no skin -> parse DATA block (m_modelSkeleton, m_remappingTable).
+- Real agents: agents/models/<x>/<x>.vmdl_c (characters/models/* are dummy stubs). Meshes: thirdperson_body, thirdperson_default_gloves (ignore firstperson_*).
+- Weapons: weapons/models/<w>/weapon_*.vmdl_c, meshes body_legacy / body_hd; current material weapons/models/<w>/materials/*.vmat.
+- Design answers: neutral mercenary start; T and CT are 7th/8th factions; solo only; real agent models + 8 guns (Glock, USP-S, Deagle, AK-47, M4A4, AWP, Nova, knife) before publish.
+- 2026-10-08 status: ms/ = py3 port of module system 1.171 (vanilla build byte-identical to game's Native txt). tools/build_module.sh -> build/module_txt (sheets -> apply_mod.py, 2 passes). tools/build_converter.sh -> build/cs2calradia-setup(.exe) (Go, converter/). Dev run: ./build/cs2calradia-setup --cs2 "/mnt/user-data/uploads/Counter-Strike Global Offensive" --game build/fakegame --vrf dl/vrf/Source2Viewer-CLI --work work/conv --force
+- Conventions learned: WB mesh space X right(L side = -X), Y fwd, Z up; skeleton local rot columns = 3 stored vecs, child t in parent frame; helmets/gloves rigid in head/hand bone local space (glove meshes X_L / X_R); long guns fwd +Y, top -X, right +Z; pistols barrel on X/Y diagonal (native flintlock); daggers blade +Y. Faces CCW, UV as glTF. Shaders: iron_shader_skin / iron_shader_Instanced flags 1824.
+- CS2 knives modelled blade-up (Source +Z). glTF JOINTS_0 = model skeleton indices. Staged pak chunks listed in /mnt/user-data/uploads/.../csgo.
+- Centres: T = town_20,21 + castle_41,42,44,47; CT = town_16,14 + castle_20,6,27,24. Module folder name "Calradia Offensive" (title TBD with user). Launch: mb_warband.exe -r -m <module> (unverified).
+- Open: finger grip pose (hands open), banners reuse native meshes, in-game test not yet run, hooks sheet + preflight script not yet written.

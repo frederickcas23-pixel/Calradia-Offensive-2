@@ -1,0 +1,405 @@
+{
+ "_doc": "Noblewomen. The engine's family script consumes exactly 20 per kingdom for 12 lords (8 wives, 8 daughters, 4 sisters), in order.",
+ "rows": [
+  {
+   "id": "kingdom_7_lady_1",
+   "name": "Lady Zora",
+   "short": "Zora",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_2",
+   "name": "Lady Mirela",
+   "short": "Mirela",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_3",
+   "name": "Lady Danica",
+   "short": "Danica",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_4",
+   "name": "Lady Ilka",
+   "short": "Ilka",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_5",
+   "name": "Lady Vesna",
+   "short": "Vesna",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_6",
+   "name": "Lady Radka",
+   "short": "Radka",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_7",
+   "name": "Lady Sanja",
+   "short": "Sanja",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_8",
+   "name": "Lady Tamara",
+   "short": "Tamara",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_9",
+   "name": "Lady Nadja",
+   "short": "Nadja",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_10",
+   "name": "Lady Katya",
+   "short": "Katya",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_11",
+   "name": "Lady Lenka",
+   "short": "Lenka",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_12",
+   "name": "Lady Dunja",
+   "short": "Dunja",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_13",
+   "name": "Lady Jasna",
+   "short": "Jasna",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_14",
+   "name": "Lady Milena",
+   "short": "Milena",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_15",
+   "name": "Lady Olena",
+   "short": "Olena",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_16",
+   "name": "Lady Petra",
+   "short": "Petra",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_17",
+   "name": "Lady Stana",
+   "short": "Stana",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_18",
+   "name": "Lady Vida",
+   "short": "Vida",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_19",
+   "name": "Lady Yelena",
+   "short": "Yelena",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_7_lady_20",
+   "name": "Lady Zlata",
+   "short": "Zlata",
+   "kingdom": "kingdom_7",
+   "items": [
+    "sarranid_lady_dress",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_1",
+   "name": "Lady Abigail",
+   "short": "Abigail",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_2",
+   "name": "Lady Brooke",
+   "short": "Brooke",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_3",
+   "name": "Lady Camille",
+   "short": "Camille",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_4",
+   "name": "Lady Dana",
+   "short": "Dana",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_5",
+   "name": "Lady Elise",
+   "short": "Elise",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_6",
+   "name": "Lady Freya",
+   "short": "Freya",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_7",
+   "name": "Lady Gwen",
+   "short": "Gwen",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_8",
+   "name": "Lady Harper",
+   "short": "Harper",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_9",
+   "name": "Lady Ingrid",
+   "short": "Ingrid",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_10",
+   "name": "Lady Joan",
+   "short": "Joan",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_11",
+   "name": "Lady Kira",
+   "short": "Kira",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_12",
+   "name": "Lady Leona",
+   "short": "Leona",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_13",
+   "name": "Lady Maren",
+   "short": "Maren",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_14",
+   "name": "Lady Nora",
+   "short": "Nora",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_15",
+   "name": "Lady Odette",
+   "short": "Odette",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_16",
+   "name": "Lady Paige",
+   "short": "Paige",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_17",
+   "name": "Lady Quinn",
+   "short": "Quinn",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_18",
+   "name": "Lady Rhea",
+   "short": "Rhea",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_19",
+   "name": "Lady Selma",
+   "short": "Selma",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  },
+  {
+   "id": "kingdom_8_lady_20",
+   "name": "Lady Tessa",
+   "short": "Tessa",
+   "kingdom": "kingdom_8",
+   "items": [
+    "lady_dress_ruby",
+    "leather_boots"
+   ]
+  }
+ ]
+}

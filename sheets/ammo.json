@@ -1,0 +1,7 @@
+{"_doc":"Bullet stacks (itp_type_bullets). mesh is a native Warband mesh: the stack is never drawn in the hand.",
+ "rows":[
+ {"id":"cs2_ammo_pistol","name":"Pistol Magazines","mesh":"cartridge_a","count":60,"damage_bonus":0,"weight":1.2,"price":220,"abundance":100,"sides":["t","ct"]},
+ {"id":"cs2_ammo_rifle","name":"Rifle Magazines","mesh":"cartridge_a","count":90,"damage_bonus":2,"weight":2.4,"price":560,"abundance":90,"sides":["t","ct"]},
+ {"id":"cs2_ammo_shells","name":"Shotgun Shells","mesh":"cartridge_a","count":32,"damage_bonus":3,"weight":1.6,"price":320,"abundance":80,"sides":["t","ct"]},
+ {"id":"cs2_ammo_awp","name":"AWP Rounds","mesh":"cartridge_a","count":20,"damage_bonus":6,"weight":1.4,"price":780,"abundance":50,"sides":["t","ct"]}
+ ]}

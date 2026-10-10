@@ -1,0 +1,15 @@
+
+from string import *
+def replace(s,a,b,n=-1): return s.replace(a,b,n)
+def strip(s,c=None): return s.strip(c)
+def lstrip(s,c=None): return s.lstrip(c)
+def rstrip(s,c=None): return s.rstrip(c)
+def find(s,sub,*a): return s.find(sub,*a)
+def rfind(s,sub,*a): return s.rfind(sub,*a)
+def lower(s): return s.lower()
+def upper(s): return s.upper()
+def split(s,sep=None,n=-1): return s.split(sep,n)
+def join(l,sep=' '): return sep.join(l)
+def atoi(s,base=10): return int(s,base)
+def atof(s): return float(s)
+def count(s,sub): return s.count(sub)
